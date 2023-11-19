@@ -1,4 +1,4 @@
-package withgenerics;
+package Transport_Managment;
 
 public class Employee {
     private String name;
@@ -70,7 +70,5 @@ public class Employee {
         System.out.println("Employee payment: " + Payment);
         System.out.println("Payment Status: " +Payment_Status);
     }
-    enum Status {
-        PAID,UNPAID
-    }
+
 }

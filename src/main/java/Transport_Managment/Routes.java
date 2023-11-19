@@ -20,7 +20,7 @@ public class Routes {
         routes.get((routes.size()+1)).add(String.format("Route%d", (routes.size()+1)));
     }
 
-    public void Add_Person(Students student){
+    public void Add_Student(Students student){
 
         for (int i = 0; i < routes.size(); i++) {
 
@@ -28,6 +28,23 @@ public class Routes {
           routes.get(i).add(student);
       }}
     }
+//    public void Add_Faculty(Faculty faculty){
+//
+//        for (int i = 0; i < routes.size(); i++) {
+//
+//            if(faculty.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
+//                routes.get(i).add(faculty);
+//            }}
+//    }
+
+//    public void Add_Staff(Staff staff){
+//
+//        for (int i = 0; i < routes.size(); i++) {
+//
+//            if(staff.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
+//                routes.get(i).add(staff);
+//            }}
+//    }
 
 
     public int Number_of_Passengers(String route){

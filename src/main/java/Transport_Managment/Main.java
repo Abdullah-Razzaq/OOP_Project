@@ -7,7 +7,7 @@ public class Main {
         System.out.println(s.equals("SP23-BCS-021"));
 
         Routes r = new Routes();
-        r.Add_Person(new Students("ewKf","SP23-BCS-021","ewf",Degree.Graduate,2,"route2",true,true,35000,Status.Paid));
+        r.Add_Student(new Students("ewKf","SP23-BCS-021","ewf",Degree.Graduate,2,"route2",true,true,35000,Status.Paid));
 
         Bus b = new Bus();
 

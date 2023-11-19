@@ -1,4 +1,4 @@
-package withgenerics;
+package Transport_Managment;
 
 class Faculty<T> extends Employee {
     private T facultySpecialization;

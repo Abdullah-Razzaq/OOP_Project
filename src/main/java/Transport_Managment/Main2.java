@@ -1,8 +1,8 @@
-package withgenerics;
+package Transport_Managment;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main2 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
@@ -27,7 +27,7 @@ public class Main {
 
         System.out.print("Payment Status (Paid, Unpaid): ");
         String paymentStatusString = input.nextLine();
-        Employee.Status paymentStatus = Employee.Status.valueOf(paymentStatusString.toUpperCase());
+        Status paymentStatus = Status.valueOf(paymentStatusString.toUpperCase());
 
         if (category == 1) {
             System.out.print("Faculty Specialization: ");
