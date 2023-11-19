@@ -5,8 +5,6 @@ public class Students {
     private String name;
     private String Reg_no;
     private String Program;
-    private Degree degree;
-    private int Semester;
     private boolean hostelite;
     private boolean scholarship;
     private String route;
@@ -16,12 +14,10 @@ public class Students {
     public Students(){
 
     }
-    public Students(String name, String reg_no, String program, Degree degree, int semester,String route, boolean hostelite, boolean scholarship, int payment, Status payment_Status) {
+    public Students(String name, String reg_no, String program,String route, boolean hostelite, boolean scholarship, int payment, Status payment_Status) {
         this.name = name;
         Reg_no = reg_no;
         Program = program;
-        this.degree = degree;
-        Semester = semester;
         this.route = route;
         this.hostelite = hostelite;
         this.scholarship = scholarship;
@@ -65,22 +61,6 @@ public class Students {
         Program = program;
     }
 
-    public Degree getDegree() {
-        return degree;
-    }
-
-    public void setDegree(Degree degree) {
-        this.degree = degree;
-    }
-
-    public int getSemester() {
-        return Semester;
-    }
-
-    public void setSemester(int semester) {
-        Semester = semester;
-    }
-
     public boolean getHostelite() {
         return hostelite;
     }
@@ -119,8 +99,6 @@ public class Students {
                 "name='" + name + '\'' +
                 ", Reg_no='" + Reg_no + '\'' +
                 ", Program='" + Program + '\'' +
-                ", degree=" + degree +
-                ", Semester=" + Semester +
                 ", hostelite=" + hostelite +
                 ", scholarship=" + scholarship +
                 ", route='" + route + '\'' +

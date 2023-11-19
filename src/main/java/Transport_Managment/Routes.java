@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Routes {
 
-    static ArrayList<ArrayList<Object>> routes = new ArrayList<ArrayList<Object>>();
+   static ArrayList<ArrayList<Object>> routes = new ArrayList<ArrayList<Object>>();
 
     Students students;
 
@@ -18,33 +18,6 @@ public class Routes {
     public void Add_New_Route() {
         routes.add(new ArrayList<Object>());
         routes.get((routes.size()-1)).add(String.format("Route%d", (routes.size())));
-    }
-
-    public void Add_Student(Students student){
-
-        for (int i = 0; i < routes.size(); i++) {
-
-      if(student.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-          routes.get(i).add(student);
-      }}
-    }
-
-    public void Add_Faculty(Faculty faculty){
-
-        for (int i = 0; i < routes.size(); i++) {
-
-            if(faculty.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                routes.get(i).add(faculty);
-            }}
-    }
-
-    public void Add_Staff(Staff staff){
-
-        for (int i = 0; i < routes.size(); i++) {
-
-            if(staff.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                routes.get(i).add(staff);
-            }}
     }
 
 
