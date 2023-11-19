@@ -1,10 +1,10 @@
 package withgenerics;
 
-class Staff<T> extends Employee<T>{
-    private String staffDepartment;
+class Staff<T> extends Employee{
+    private T staffDepartment;
 
-    public Staff(String name, int id, boolean isFaculty, T employeeInfo, String staffDepartment) {
-        super(name, id, isFaculty, employeeInfo);
+    public Staff(String name, String id, boolean isFaculty, String route, int payment, Status payment_Status, T staffDepartment) {
+        super(name, id, isFaculty, route, payment, payment_Status);
         this.staffDepartment = staffDepartment;
     }
 
@@ -12,11 +12,11 @@ class Staff<T> extends Employee<T>{
 
     }
 
-    public String getStaffDepartment() {
+    public T getStaffDepartment() {
         return staffDepartment;
     }
 
-    public void setStaffDepartment(String staffDepartment) {
+    public void setStaffDepartment(T staffDepartment) {
         this.staffDepartment = staffDepartment;
     }
 

@@ -1,10 +1,10 @@
 package withgenerics;
 
-class Faculty<T> extends Employee<T> {
-    private String facultySpecialization;
+class Faculty<T> extends Employee {
+    private T facultySpecialization;
 
-    public Faculty(String name, int id, boolean isFaculty, T employeeInfo, String facultySpecialization) {
-        super(name, id, isFaculty, employeeInfo);
+    public Faculty(String name, String id, boolean isFaculty, String route, int payment, Status payment_Status, T facultySpecialization) {
+        super(name, id, isFaculty, route, payment, payment_Status);
         this.facultySpecialization = facultySpecialization;
     }
 
@@ -12,11 +12,11 @@ class Faculty<T> extends Employee<T> {
 
     }
 
-    public String getFacultySpecialization() {
+    public T getFacultySpecialization() {
         return facultySpecialization;
     }
 
-    public void setFacultySpecialization(String facultySpecialization) {
+    public void setFacultySpecialization(T facultySpecialization) {
         this.facultySpecialization = facultySpecialization;
     }
 
