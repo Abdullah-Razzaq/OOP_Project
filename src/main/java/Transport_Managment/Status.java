@@ -1,7 +1,7 @@
 package Transport_Managment;
 
 public enum Status {
-    Paid(1),
+    PAID(1),
     Unpaid(0);
 
     private int value;

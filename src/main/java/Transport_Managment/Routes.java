@@ -18,6 +18,7 @@ public class Routes {
     public void Add_New_Route() {
         routes.add(new ArrayList<Object>());
         routes.get((routes.size()-1)).add(String.format("Route%d", (routes.size())));
+        System.out.println("New Route Added successfully");
     }
 
 
