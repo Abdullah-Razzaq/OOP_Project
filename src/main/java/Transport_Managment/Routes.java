@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Routes {
 
-    static ArrayList<ArrayList<Object>> routes = new ArrayList<ArrayList<Object>>(12);
+    static ArrayList<ArrayList<Object>> routes = new ArrayList<ArrayList<Object>>();
 
     Students students;
 
@@ -17,7 +17,7 @@ public class Routes {
 
     public void Add_New_Route() {
         routes.add(new ArrayList<Object>());
-        routes.get((routes.size()+1)).add(String.format("Route%d", (routes.size()+1)));
+        routes.get((routes.size()-1)).add(String.format("Route%d", (routes.size())));
     }
 
     public void Add_Student(Students student){
@@ -28,29 +28,32 @@ public class Routes {
           routes.get(i).add(student);
       }}
     }
-//    public void Add_Faculty(Faculty faculty){
-//
-//        for (int i = 0; i < routes.size(); i++) {
-//
-//            if(faculty.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-//                routes.get(i).add(faculty);
-//            }}
-//    }
 
-//    public void Add_Staff(Staff staff){
-//
-//        for (int i = 0; i < routes.size(); i++) {
-//
-//            if(staff.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-//                routes.get(i).add(staff);
-//            }}
-//    }
+    public void Add_Faculty(Faculty faculty){
+
+        for (int i = 0; i < routes.size(); i++) {
+
+            if(faculty.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
+                routes.get(i).add(faculty);
+            }}
+    }
+
+    public void Add_Staff(Staff staff){
+
+        for (int i = 0; i < routes.size(); i++) {
+
+            if(staff.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
+                routes.get(i).add(staff);
+            }}
+    }
 
 
-    public int Number_of_Passengers(String route){
+    public static int Number_of_Passengers(int Route_no){
+
+      String route = String.format("Route%d", Route_no);
         for (int i = 0; i < routes.size(); i++) {
             if(route.equalsIgnoreCase((String) routes.get(i).get(0))) {
-                return routes.get(i).size();
+                return routes.get(i).size()-1;
             }
         }
         return -1;

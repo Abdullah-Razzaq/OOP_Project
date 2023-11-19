@@ -8,7 +8,7 @@ class Staff<T> extends Employee{
         this.staffDepartment = staffDepartment;
     }
 
-    public Staff(String staff) {
+    public Staff() {
 
     }
 

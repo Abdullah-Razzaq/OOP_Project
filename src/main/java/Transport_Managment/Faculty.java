@@ -8,7 +8,7 @@ class Faculty<T> extends Employee {
         this.facultySpecialization = facultySpecialization;
     }
 
-    public Faculty(String faculty) {
+    public Faculty() {
 
     }
 

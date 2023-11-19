@@ -115,7 +115,7 @@ public class Students {
 
     @Override
     public String toString() {
-        return "Students{" +
+        return "Students info:" +
                 "name='" + name + '\'' +
                 ", Reg_no='" + Reg_no + '\'' +
                 ", Program='" + Program + '\'' +
@@ -125,8 +125,7 @@ public class Students {
                 ", scholarship=" + scholarship +
                 ", route='" + route + '\'' +
                 ", Payment=" + Payment +
-                ", Payment_Status=" + Payment_Status +
-                '}';
+                ", Payment_Status=" + Payment_Status;
     }
 
     @Override

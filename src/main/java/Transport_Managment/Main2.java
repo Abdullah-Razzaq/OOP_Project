@@ -36,7 +36,6 @@ public class Main2 {
             System.out.println("\nEmployee Information:");
             facultyInfo.displayInfo();
 
-
         } else {
             System.out.print("Staff Department: ");
             String staffDepartment = input.nextLine();

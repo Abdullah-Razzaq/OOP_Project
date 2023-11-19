@@ -70,5 +70,4 @@ public class Employee {
         System.out.println("Employee payment: " + Payment);
         System.out.println("Payment Status: " +Payment_Status);
     }
-
 }
