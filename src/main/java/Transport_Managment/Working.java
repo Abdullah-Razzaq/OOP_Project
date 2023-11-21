@@ -5,17 +5,18 @@ import java.util.Scanner;
 
 public class Working{
     Scanner input = new Scanner(System.in);
+    Scanner input1 = new Scanner(System.in);
     int choice, choice1, payment;
     String name, id, program,route, facultySpecialization, staffDepartment;
     boolean hostelite, scholarship;
     Status paymentStatus;
 
-    Bus b;
-
-    Routes r;
-    Management m;
+    Bus b = new Bus();
+    Routes routes = new Routes();
+    Management m = new Management();
 
     public Working(){
+
 
         while (choice != 7) {
             System.out.println("""
@@ -40,16 +41,15 @@ public class Working{
                             """);
                     choice1 = input.nextInt();
                     if (choice1 == 1) {
-                        name = input.nextLine();
                         Input();
                         m.Add_Student(new Students(name, id, program, route, hostelite, scholarship, payment, paymentStatus));
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
-                        id = input.nextLine();
+                        id = input1.nextLine();
                         m.Remove(id);
                     } else if (choice1 == 3) {
                         System.out.print("Enter previous ID or Registration: ");
-                        id = input.nextLine();
+                        id = input1.nextLine();
                         System.out.println("Enter updated student details:");
                         Input();
                         m.Update(id, new Students(name, id, program, route, hostelite, scholarship, payment, paymentStatus));
@@ -69,11 +69,11 @@ public class Working{
                         m.Add_Faculty(new Faculty<>(name, id, true, route, payment, paymentStatus, facultySpecialization));
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
-                        id = input.nextLine();
+                        id = input1.nextLine();
                         m.Remove(id);
                     } else if (choice1 == 3) {
                         System.out.print("Enter previous ID or Registration: ");
-                        id = input.nextLine();
+                        id = input1.nextLine();
                         System.out.println("Enter updated faculty details:");
                         Input3();
                         faculty();
@@ -94,11 +94,11 @@ public class Working{
                         m.Add_Staff(new Staff<>(name, id, true, route, payment, paymentStatus, staffDepartment));
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
-                        id = input.nextLine();
+                        id = input1.nextLine();
                         m.Remove(id);
                     } else if (choice1 == 3) {
                         System.out.print("Enter previous ID or Registration: ");
-                        id = input.nextLine();
+                        id = input1.nextLine();
                         System.out.println("Enter updated faculty details:");
                         Input3();
                         staff();
@@ -115,13 +115,13 @@ public class Working{
                             """);
                     choice1 = input.nextInt();
                     if (choice1 == 1) {
-                        r.Add_New_Route();
-                    } else if (choice == 2) {
+                        routes.Add_New_Route();
+                    } else if (choice1 == 2) {
                         System.out.println("Enter route no:");
-                        int Route_no = input.nextInt();
+                        int Route_no = input1.nextInt();
                         Routes.Number_of_Passengers(Route_no);
-                    } else if (choice == 3) {
-                        System.out.println(r);
+                    } else if (choice1 == 3) {
+                        System.out.println(routes);
                     }
                     break;
                 }
@@ -158,13 +158,13 @@ public class Working{
 
     void Input(){
         System.out.print("Name: ");
-        name = input.nextLine();
+        name = input1.nextLine();
 
         System.out.print("ID or Registration: ");
-         id = input.nextLine();
+         id = input1.nextLine();
 
         System.out.print("Program : ");
-         program = input.nextLine();
+         program = input1.nextLine();
 
         System.out.print("Hostelite (true for yes, false for no) : ");
          hostelite = input.nextBoolean();
@@ -177,24 +177,28 @@ public class Working{
     }
     void Input_2(){
         System.out.print("Route: ");
-        route = input.nextLine();
+        route = input1.nextLine();
 
         System.out.print("Payment: ");
          payment = input.nextInt();
-        input.nextLine();
+
 
         System.out.print("Payment Status (Paid, Unpaid): ");
-        String paymentStatusString = input.nextLine();
-        Status paymentStatus = Status.valueOf(paymentStatusString.toUpperCase());
+        String paymentStatusString = input1.nextLine();
+        if(paymentStatusString.equalsIgnoreCase("paid")){
+            paymentStatus = Status.PAID;
+        } else if (paymentStatusString.equalsIgnoreCase("unpaid")) {
+            paymentStatus = Status.Unpaid;
 
+        }
     }
 
     void Input3(){
         System.out.print("Name: ");
-        name = input.nextLine();
+        name = input1.nextLine();
 
         System.out.print("ID or Registration: ");
-        id = input.nextLine();
+        id = input1.nextLine();
 
         Input_2();
 
@@ -203,12 +207,12 @@ public class Working{
     void faculty(){
 
         System.out.print("Faculty Specialization: ");
-        facultySpecialization = input.nextLine();
+        facultySpecialization = input1.nextLine();
     }
     void staff(){
 
         System.out.print("Staff Department: ");
-        staffDepartment = input.nextLine();
+        staffDepartment = input1.nextLine();
     }
 }
 
