@@ -37,7 +37,7 @@ public class FileHandler {
                 lines.add(line);
             }
         } catch (IOException e) {
-            System.err.println("Error reading from file: " + e.getMessage());
+            System.out.println(e);
         }
 
         return lines;
