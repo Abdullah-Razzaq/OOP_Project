@@ -1,7 +1,9 @@
 package Transport_Managment;
 
-import java.lang.invoke.SwitchPoint;
+import java.util.List;
 import java.util.Scanner;
+
+import static Transport_Managment.FileHandler.readFile;
 
 public class Working{
     Scanner input = new Scanner(System.in);
@@ -14,9 +16,9 @@ public class Working{
     Bus b = new Bus();
     Routes routes = new Routes();
     Management m = new Management();
+    List<String> fileContents = readFile("employee_data.txt");
 
     public Working(){
-
 
         while (choice != 7) {
             System.out.println("""
@@ -42,7 +44,9 @@ public class Working{
                     choice1 = input.nextInt();
                     if (choice1 == 1) {
                         Input();
-                        m.Add_Student(new Students(name, id, program, route, hostelite, scholarship, payment, paymentStatus));
+                        Students newStudent = new Students(name, id, program, route, hostelite, scholarship, payment, paymentStatus);
+                        m.Add_Student(newStudent);
+                        FileHandler.writeStudent(newStudent);
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
                         id = input1.nextLine();
@@ -66,7 +70,9 @@ public class Working{
                     if (choice1 == 1) {
                         Input3();
                         faculty();
-                        m.Add_Faculty(new Faculty<>(name, id, true, route, payment, paymentStatus, facultySpecialization));
+                        Faculty<Object> newFaculty = new Faculty<>(name, id, true, route, payment, paymentStatus, facultySpecialization);
+                        m.Add_Faculty(newFaculty);
+                        FileHandler.writeEmployee(newFaculty);
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
                         id = input1.nextLine();
@@ -91,7 +97,9 @@ public class Working{
                     if (choice1 == 1) {
                         Input3();
                         staff();
-                        m.Add_Staff(new Staff<>(name, id, true, route, payment, paymentStatus, staffDepartment));
+                        Staff<Object> newStaff = new Staff<>(name, id, true, route, payment, paymentStatus, staffDepartment);
+                        m.Add_Staff(newStaff);
+                        FileHandler.writeEmployee(newStaff);
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
                         id = input1.nextLine();
@@ -145,6 +153,10 @@ public class Working{
                 }
                 case 7: {
                     System.out.println("Successfully Exited");
+                    System.out.println("File Content:");
+                    for (String line : fileContents) {
+                        System.out.println(line);
+                    }
                     break;
                 }
                 default: {
@@ -161,18 +173,18 @@ public class Working{
         name = input1.nextLine();
 
         System.out.print("ID or Registration: ");
-         id = input1.nextLine();
+        id = input1.nextLine();
 
         System.out.print("Program : ");
-         program = input1.nextLine();
+        program = input1.nextLine();
 
         System.out.print("Hostelite (true for yes, false for no) : ");
-         hostelite = input.nextBoolean();
+        hostelite = input.nextBoolean();
 
         System.out.print("scholarship (true for yes, false for no) : ");
-         scholarship = input.nextBoolean();
+        scholarship = input.nextBoolean();
 
-         Input_2();
+        Input_2();
 
     }
     void Input_2(){
@@ -180,7 +192,7 @@ public class Working{
         route = input1.nextLine();
 
         System.out.print("Payment: ");
-         payment = input.nextInt();
+        payment = input.nextInt();
 
 
         System.out.print("Payment Status (Paid, Unpaid): ");

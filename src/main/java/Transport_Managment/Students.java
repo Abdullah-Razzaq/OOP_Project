@@ -95,15 +95,8 @@ public class Students {
 
     @Override
     public String toString() {
-        return "Students info:" +
-                "name='" + name + '\'' +
-                ", Reg_no='" + Reg_no + '\'' +
-                ", Program='" + Program + '\'' +
-                ", hostelite=" + hostelite +
-                ", scholarship=" + scholarship +
-                ", route='" + route + '\'' +
-                ", Payment=" + Payment +
-                ", Payment_Status=" + Payment_Status;
+        return String.format("Name: %s | Reg_no: %s | Program: %s | Hostelite: %s | Scholarship: %s | Route: %s | Payment: %d | Payment Status: %s",
+                name, Reg_no, Program, hostelite, scholarship, route, Payment, Payment_Status);
     }
 
     @Override
