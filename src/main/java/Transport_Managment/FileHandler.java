@@ -70,10 +70,9 @@ public class FileHandler {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
 
-                Students student = new Students(data[0], data[1], data[2],
-                        Degree.valueOf(data[3]), Integer.parseInt(data[4]), data[5],
-                        Boolean.parseBoolean(data[6]), Boolean.parseBoolean(data[7]),
-                        Integer.parseInt(data[8]), Status.valueOf(data[9]));
+                Students student = new Students(data[0], data[1], data[2], Integer.parseInt(data[3]), data[4],
+                        Boolean.parseBoolean(data[5]), Boolean.parseBoolean(data[6]),
+                        Integer.parseInt(data[7]), Status.valueOf(data[8]));
                 studentsList.add(student);
             }
 
