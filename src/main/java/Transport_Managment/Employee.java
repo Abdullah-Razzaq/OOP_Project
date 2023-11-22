@@ -70,4 +70,9 @@ public class Employee {
         System.out.println("Employee payment: " + Payment);
         System.out.println("Payment Status: " +Payment_Status);
     }
+    @Override
+    public String toString() {
+        return String.format("Name: %s | ID: %s | Route: %s | Payment: %d | Payment Status: %s",
+                name, id, route, Payment, Payment_Status);
+    }
 }

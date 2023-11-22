@@ -25,4 +25,9 @@ class Staff<T> extends Employee{
         super.displayInfo();
         System.out.println("Staff Department: " + staffDepartment);
     }
+    @Override
+    public String toString() {
+        return super.toString() + String.format(" | Staff Department: %s", staffDepartment);
+    }
+
 }
