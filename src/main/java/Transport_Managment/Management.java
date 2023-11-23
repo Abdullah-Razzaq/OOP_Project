@@ -69,6 +69,7 @@ public class Management {
         }
     }
 
+
     public int Total_Payment_Recieved(){
         return Total_Payment;
     }
