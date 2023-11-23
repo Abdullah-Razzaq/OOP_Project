@@ -3,14 +3,14 @@ package Transport_Managment;
 public class Management {
 
     Routes r;
-    static int Payment;
+    static int Total_Payment;
 
     public void Add_Student(Students student){
 
         for (int i = 0; i < r.routes.size(); i++) {
 
             if(student.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                Payment = Payment + student.getPayment();
+                Total_Payment = Total_Payment + student.getPayment();
                 r.routes.get(i).add(student);
             }}
     }
@@ -20,7 +20,7 @@ public class Management {
         for (int i = 0; i < r.routes.size(); i++) {
 
             if(faculty.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                Payment = Payment + faculty.getPayment();
+                Total_Payment = Total_Payment + faculty.getPayment();
                 r.routes.get(i).add(faculty);
             }}
     }
@@ -30,7 +30,7 @@ public class Management {
         for (int i = 0; i < r.routes.size(); i++) {
 
             if(staff.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                Payment = Payment + staff.getPayment();
+                Total_Payment = Total_Payment + staff.getPayment();
                 r.routes.get(i).add(staff);
             }}
     }
@@ -70,7 +70,7 @@ public class Management {
     }
 
     public int Total_Payment_Recieved(){
-        return Payment;
+        return Total_Payment;
     }
 
 }
