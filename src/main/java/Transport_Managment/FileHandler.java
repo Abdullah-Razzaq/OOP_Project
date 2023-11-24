@@ -6,28 +6,19 @@ import java.util.List;
 
 public class FileHandler {
     private static final String file = "employee_data.txt";
-    public static void writeEmployee(Employee employee) {
+
+    public static void writeFile(Object o) {
         try (FileWriter fw = new FileWriter(file, true);
              BufferedWriter bw = new BufferedWriter(fw)) {
 
-            bw.write(employee.toString());
+            bw.write(o.toString());
             bw.newLine();
 
         } catch (IOException e) {
             System.out.println(e);
         }
     }
-    public static void writeStudent(Students student) {
-        try (FileWriter fw = new FileWriter(file, true);
-             BufferedWriter bw = new BufferedWriter(fw)) {
 
-            bw.write(student.toString());
-            bw.newLine();
-
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
     public static List<String> readFile(String fileName) {
         List<String> lines = new ArrayList<>();
 
@@ -40,9 +31,14 @@ public class FileHandler {
             System.out.println(e);
         }
 
+        Routes.routes.clear();
+        for (String routeLine : lines) {
+            ArrayList<Object> routeData = new ArrayList<>();
+            routeData.add(routeLine);
+            Routes.routes.add(routeData);
+        }
         return lines;
     }
-
 
 
 }

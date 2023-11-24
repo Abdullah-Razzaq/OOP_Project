@@ -46,7 +46,7 @@ public class Working{
                         Input();
                         Students newStudent = new Students(name, id, program, route, hostelite, scholarship, payment, paymentStatus);
                         m.Add_Student(newStudent);
-                        FileHandler.writeStudent(newStudent);
+                        FileHandler.writeFile(newStudent);
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
                         id = input1.nextLine();
@@ -72,7 +72,7 @@ public class Working{
                         faculty();
                         Faculty<Object> newFaculty = new Faculty<>(name, id, true, route, payment, paymentStatus, facultySpecialization);
                         m.Add_Faculty(newFaculty);
-                        FileHandler.writeEmployee(newFaculty);
+                        FileHandler.writeFile(newFaculty);
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
                         id = input1.nextLine();
@@ -99,7 +99,7 @@ public class Working{
                         staff();
                         Staff<Object> newStaff = new Staff<>(name, id, true, route, payment, paymentStatus, staffDepartment);
                         m.Add_Staff(newStaff);
-                        FileHandler.writeEmployee(newStaff);
+                        FileHandler.writeFile(newStaff);
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
                         id = input1.nextLine();
