@@ -2,43 +2,88 @@ package Transport_Managment;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class FileHandler {
-    private static final String file = "employee_data.txt";
 
-    public static void writeFile(Object o) {
-        try (FileWriter fw = new FileWriter(file, true);
-             BufferedWriter bw = new BufferedWriter(fw)) {
+    static File file = new File("Routes information");
+    static FileWriter fw;
+    static BufferedWriter bw;
 
-            bw.write(o.toString());
-            bw.newLine();
+    static Routes re = new Routes();
 
-        } catch (IOException e) {
-            System.out.println(e);
+    public static void Write_File() throws IOException {
+        try{
+            fw = new FileWriter(file);
+            bw = new BufferedWriter(fw);
         }
-    }
+        catch (IOException e){
 
-    public static List<String> readFile(String fileName) {
-        List<String> lines = new ArrayList<>();
+        }
+        finally {
+            for (int i = 0; i < Routes.routes.size(); i++) {
+                for (int j = 0; j < Routes.routes.get(i).size(); j++) {
+                    if(Routes.routes.get(i).size() == 1)
+                    {
+                        bw.write(String.valueOf(Routes.routes.get(i).get(j)));
+                        bw.write("\n");
+                        bw.write("none");
+                        bw.write("\n");
+                    }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
+                    else{
+                        if(Routes.routes.get(i).contains("Route1")){
+                            bw.write(String.valueOf(Routes.routes.get(i).get(j)));
+                        }
+                        bw.write(String.valueOf(Routes.routes.get(i).get(j)));
+                    bw.write("\n");
+                    }
+
+
+                }
             }
-        } catch (IOException e) {
-            System.out.println(e);
         }
 
-        Routes.routes.clear();
-        for (String routeLine : lines) {
-            ArrayList<Object> routeData = new ArrayList<>();
-            routeData.add(routeLine);
-            Routes.routes.add(routeData);
-        }
-        return lines;
+        bw.close();
+        fw.close();
     }
+
+    public static void Read_file() throws IOException {
+             Scanner sc = new Scanner(file);
+             int k = 0, p = 2;
+             String s = String.format("Route%d", p);
+            ArrayList<String> l = new ArrayList<>();
+            if(!(sc.hasNextLine())){
+                re.Array_Initialization();
+            }
+            else {
+            while(sc.hasNextLine()) {
+              l.add(sc.nextLine());}
+            re.Array_Initialization_1();
+                        for (int j = 0; j < l.size(); j++){
+                            if(l.get(j).equals(s)){
+                                p++;
+                                k++;
+                                s = String.format("Route%d", p);
+                                Routes.routes.get(k).add(l.get(j));
+                            }  else {
+                            Routes.routes.get(k).add(l.get(j));}
+            }
+                for (int i = 0; i < Routes.routes.size(); i++) {
+                    if( Routes.routes.size() > 3){
+                        for (int j = 0; j < Routes.routes.get(i).size(); j++) {
+                            if(Routes.routes.get(i).get(j).equals("none")){
+                                Routes.routes.get(i).remove(j);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+     }
 
 
 }

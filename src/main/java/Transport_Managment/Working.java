@@ -1,9 +1,9 @@
 package Transport_Managment;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import static Transport_Managment.FileHandler.readFile;
 
 public class Working{
     Scanner input = new Scanner(System.in);
@@ -16,9 +16,9 @@ public class Working{
     Bus b = new Bus();
     Routes routes = new Routes();
     Management m = new Management();
-    List<String> fileContents = readFile("employee_data.txt");
 
-    public Working(){
+    public Working() throws IOException {
+        FileHandler.Read_file();
 
         while (choice != 7) {
             System.out.println("""
@@ -46,7 +46,6 @@ public class Working{
                         Input();
                         Students newStudent = new Students(name, id, program, route, hostelite, scholarship, payment, paymentStatus);
                         m.Add_Student(newStudent);
-                        FileHandler.writeFile(newStudent);
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
                         id = input1.nextLine();
@@ -72,7 +71,6 @@ public class Working{
                         faculty();
                         Faculty<Object> newFaculty = new Faculty<>(name, id, true, route, payment, paymentStatus, facultySpecialization);
                         m.Add_Faculty(newFaculty);
-                        FileHandler.writeFile(newFaculty);
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
                         id = input1.nextLine();
@@ -99,7 +97,7 @@ public class Working{
                         staff();
                         Staff<Object> newStaff = new Staff<>(name, id, true, route, payment, paymentStatus, staffDepartment);
                         m.Add_Staff(newStaff);
-                        FileHandler.writeFile(newStaff);
+
                     } else if (choice1 == 2) {
                         System.out.print("Enter ID or Registration: ");
                         id = input1.nextLine();
@@ -153,10 +151,7 @@ public class Working{
                 }
                 case 7: {
                     System.out.println("Successfully Exited");
-                    System.out.println("File Content:");
-                    for (String line : fileContents) {
-                        System.out.println(line);
-                    }
+                    FileHandler.Write_File();
                     break;
                 }
                 default: {

@@ -8,10 +8,16 @@ public class Routes {
 
     Students students;
 
-  {
+  public void Array_Initialization(){
        for (int i = 1; i < 13; i++) {
            routes.add(new ArrayList<Object>());
            routes.get(i-1).add(0,String.format("Route%d", i));
+       }
+    }
+
+    public void Array_Initialization_1(){
+       for (int i = 1; i < 13; i++) {
+           routes.add(new ArrayList<Object>());
        }
     }
 

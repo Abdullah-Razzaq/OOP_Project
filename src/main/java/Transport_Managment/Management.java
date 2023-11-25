@@ -5,13 +5,13 @@ public class Management {
     Routes r;
     static int Total_Payment;
 
-    public void Add_Student(Students student){
+    public static void Add_Student(Students student){
 
-        for (int i = 0; i < r.routes.size(); i++) {
+        for (int i = 0; i < Routes.routes.size(); i++) {
 
             if(student.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
                 Total_Payment = Total_Payment + student.getPayment();
-                r.routes.get(i).add(student);
+                Routes.routes.get(i).add(student);
             }}
     }
 
