@@ -1,27 +1,127 @@
 package Transport_Managment;
 
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class gui extends Application {
 
     public static void main(String[] args) throws IOException {
         launch(args);
     }
-
     @Override
-    public void start(Stage stage1) {
-        stage1.setTitle("Transport Management");
+    public void start(Stage stage) throws IOException {
+        GridPane grid = new GridPane();
+        Scene scene = new Scene(grid, 700,500 );
+        stage.setTitle("Transport Management");
+        grid.setStyle("-fx-background-color: rgba(198,232,254,0.45)");
+
+
+        HBox sub_head1 =new HBox();
+        Text main_head = new Text("CUI ROUTE MANAGEMENT");
+        main_head.setFont(Font.font("Monospaced", FontWeight.BOLD,32));
+        main_head.setFill(Color.WHITE);
+        sub_head1.getChildren().add(main_head);
+        sub_head1.setStyle("-fx-background-color: #9dd4f9");
+        sub_head1.setAlignment(Pos.CENTER);
+
+
+        HBox box1 = new HBox();
+        box1.setBorder(new Border(new BorderStroke(Color.rgb(149,203,240), BorderStrokeStyle.DASHED,null,new BorderWidths(3))));
+        Text t1 = new Text("Passengers info");
+        t1.setFont(Font.font("serif",20));
+        t1.setFill(Color.rgb(103,188,241));
+        Button button1 = new Button("Passengers");
+        button1.setOnAction(e -> {Passengers(stage);});
+        HBox box1_1 =new HBox();
+        HBox box1_2 =new HBox();
+        box1_1.getChildren().add(t1);
+        box1_2.getChildren().add(button1);
+        box1_1.setPadding(new Insets(13,10,10,10));
+        box1_2.setPadding(new Insets(13,10,10,200));
+        button1.setPadding(new Insets(5,20,5,20));
+
+        box1.getChildren().addAll(box1_1,box1_2);
+
+        HBox box2 = new HBox();
+        box2.setBorder(new Border(new BorderStroke(Color.rgb(149,203,240), BorderStrokeStyle.DASHED,null,new BorderWidths(3))));
+        Text t2 = new Text("Routes info");
+        t2.setFont(Font.font("serif",20));
+        t2.setFill(Color.rgb(103,188,241));
+        Button button2 = new Button("Routes");
+        HBox box2_1 =new HBox();
+        HBox box2_2 =new HBox();
+        box2_1.getChildren().add(t2);
+        box2_2.getChildren().add(button2);
+        box2_1.setPadding(new Insets(13,10,10,10));
+        box2_2.setPadding(new Insets(13,10,10,250));
+        button2.setPadding(new Insets(5,20,5,20));
+
+        box2.getChildren().addAll(box2_1,box2_2);
+
+        HBox box3 = new HBox();
+        box3.setBorder(new Border(new BorderStroke(Color.rgb(149,203,240), BorderStrokeStyle.DASHED,null,new BorderWidths(3))));
+        Text t3 = new Text("Bus info");
+        t3.setFont(Font.font("serif",20));
+        t3.setFill(Color.rgb(103,188,241));
+        Button button3 = new Button("Bus");
+        HBox box3_1 =new HBox();
+        HBox box3_2 =new HBox();
+        box3_1.getChildren().add(t3);
+        box3_2.getChildren().add(button3);
+        box3_1.setPadding(new Insets(13,10,10,10));
+        box3_2.setPadding(new Insets(13,10,10,290));
+        button3.setPadding(new Insets(5,20,5,20));
+
+        box3.getChildren().addAll(box3_1,box3_2);
+
+        HBox box4 = new HBox();
+        box4.setBorder(new Border(new BorderStroke(Color.rgb(149,203,240), BorderStrokeStyle.DASHED,null,new BorderWidths(3))));
+        Text t4 = new Text("Payment info");
+        t4.setFont(Font.font("serif",20));
+        t4.setFill(Color.rgb(103,188,241));
+        Button button4 = new Button("payment");
+        HBox box4_1 =new HBox();
+        HBox box4_2 =new HBox();
+        box4_1.getChildren().add(t4);
+        box4_2.getChildren().add(button4);
+        box4_1.setPadding(new Insets(13,10,10,10));
+        box4_2.setPadding(new Insets(13,10,10,224));
+        button4.setPadding(new Insets(5,20,5,20));
+        box4.getChildren().addAll(box4_1,box4_2);
+
+        Button exit = new Button("Exit");
+        exit.setPadding(new Insets(10,20,10,20));
+        exit.setOnAction(e -> stage.close());
+
+        grid.add(sub_head1,0,0);
+        grid.add(box1,0,1);
+        grid.add(box2,0,2);
+        grid.add(box3,0,3);
+        grid.add(box4,0,4);
+        grid.add(exit,1,7);
+        grid.setAlignment(Pos.CENTER);
+        grid.setVgap(15);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    public void Passengers(Stage stage1) {
 
         Button addButton = new Button("Add");
         Button removeButton = new Button("Remove");
