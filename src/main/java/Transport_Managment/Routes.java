@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Routes {
 
    static ArrayList<ArrayList<Object>> routes = new ArrayList<ArrayList<Object>>();
+   static ArrayList<ArrayList<Object>> info = new ArrayList<ArrayList<Object>>();
 
     Students students;
 

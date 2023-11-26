@@ -12,7 +12,7 @@ public class Working{
     String name, id, program,route, facultySpecialization, staffDepartment;
     boolean hostelite, scholarship;
     Status paymentStatus;
-
+    String id1;
     Bus b = new Bus();
     Routes routes = new Routes();
     Management m = new Management();
@@ -52,10 +52,10 @@ public class Working{
                         m.Remove(id);
                     } else if (choice1 == 3) {
                         System.out.print("Enter previous ID or Registration: ");
-                        id = input1.nextLine();
+                        id1 = input1.nextLine();
                         System.out.println("Enter updated student details:");
                         Input();
-                        m.Update(id, new Students(name, id, program, route, hostelite, scholarship, payment, paymentStatus));
+                        m.Update_Student(id1, new Students(name, id, program, route, hostelite, scholarship, payment, paymentStatus));
                     }
                     break;
                 }
@@ -77,11 +77,11 @@ public class Working{
                         m.Remove(id);
                     } else if (choice1 == 3) {
                         System.out.print("Enter previous ID or Registration: ");
-                        id = input1.nextLine();
+                        id1 = input1.nextLine();
                         System.out.println("Enter updated faculty details:");
                         Input3();
                         faculty();
-                        m.Update(id, new Faculty<>(name, id, true, route, payment, paymentStatus, facultySpecialization));
+                        m.Update_Faculty(id1, new Faculty<>(name, id, true, route, payment, paymentStatus, facultySpecialization));
                     }
                     break;
                 }
@@ -104,11 +104,11 @@ public class Working{
                         m.Remove(id);
                     } else if (choice1 == 3) {
                         System.out.print("Enter previous ID or Registration: ");
-                        id = input1.nextLine();
+                        id1 = input1.nextLine();
                         System.out.println("Enter updated faculty details:");
                         Input3();
                         staff();
-                        m.Update(id, new Staff<>(name, id, true, route, payment, paymentStatus, staffDepartment));
+                        m.Update_Staff(id1, new Staff<>(name, id, true, route, payment, paymentStatus, staffDepartment));
                     }
                     break;
                 }
@@ -124,8 +124,8 @@ public class Working{
                         routes.Add_New_Route();
                     } else if (choice1 == 2) {
                         System.out.println("Enter route no:");
-                        int Route_no = input1.nextInt();
-                        Routes.Number_of_Passengers(Route_no);
+                        int Route_no = input.nextInt();
+                        System.out.println(Routes.Number_of_Passengers(Route_no));
                     } else if (choice1 == 3) {
                         System.out.println(routes);
                     }
@@ -222,5 +222,3 @@ public class Working{
         staffDepartment = input1.nextLine();
     }
 }
-
-

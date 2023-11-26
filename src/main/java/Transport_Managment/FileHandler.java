@@ -8,11 +8,12 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-    static File file = new File("Routes information");
+    static File file = new File("Raw Routes information");
     static FileWriter fw;
     static BufferedWriter bw;
 
     static Routes re = new Routes();
+    static ArrayList<Object> l = new ArrayList<>();
 
     public static void Write_File() throws IOException {
         try{
@@ -23,67 +24,130 @@ public class FileHandler {
 
         }
         finally {
-            for (int i = 0; i < Routes.routes.size(); i++) {
-                for (int j = 0; j < Routes.routes.get(i).size(); j++) {
-                    if(Routes.routes.get(i).size() == 1)
-                    {
-                        bw.write(String.valueOf(Routes.routes.get(i).get(j)));
-                        bw.write("\n");
-                        bw.write("none");
-                        bw.write("\n");
-                    }
+            for (int i = 0; i < Routes.info.size(); i++) {
+                for (int j = 0; j < Routes.info.get(i).size(); j++) {
 
-                    else{
-                        if(Routes.routes.get(i).contains("Route1")){
-                            bw.write(String.valueOf(Routes.routes.get(i).get(j)));
-                        }
-                        bw.write(String.valueOf(Routes.routes.get(i).get(j)));
-                    bw.write("\n");
-                    }
-
-
+                    bw.write(String.valueOf(Routes.info.get(i).get(j)));
+                    bw.write("\t");
                 }
+
+                bw.write("\n");
+            }
+        }
+        bw.close();
+        fw.close();
+
+    }
+
+
+
+    public static void Read_file() throws IOException {
+
+        re.Array_Initialization();
+        Scanner sc = new Scanner(file);
+        String h = "Student:";
+        String h1 = "Faculty:";
+        String h2 = "Staff:";
+
+        while(sc.hasNext()) {
+            String w = sc.next();
+            if (w.contains(h)) {
+                Student_add(sc);
+                l.clear();
+            }
+            if (w.contains(h1)) {
+                Faculty_a(sc);
+                l.clear();
+            }
+            if(w.contains(h2)){
+                Staff_a(sc);
+                l.clear();
             }
         }
 
-        bw.close();
-        fw.close();
     }
 
-    public static void Read_file() throws IOException {
-             Scanner sc = new Scanner(file);
-             int k = 0, p = 2;
-             String s = String.format("Route%d", p);
-            ArrayList<String> l = new ArrayList<>();
-            if(!(sc.hasNextLine())){
-                re.Array_Initialization();
-            }
-            else {
-            while(sc.hasNextLine()) {
-              l.add(sc.nextLine());}
-            re.Array_Initialization_1();
-                        for (int j = 0; j < l.size(); j++){
-                            if(l.get(j).equals(s)){
-                                p++;
-                                k++;
-                                s = String.format("Route%d", p);
-                                Routes.routes.get(k).add(l.get(j));
-                            }  else {
-                            Routes.routes.get(k).add(l.get(j));}
-            }
-                for (int i = 0; i < Routes.routes.size(); i++) {
-                    if( Routes.routes.size() > 3){
-                        for (int j = 0; j < Routes.routes.get(i).size(); j++) {
-                            if(Routes.routes.get(i).get(j).equals("none")){
-                                Routes.routes.get(i).remove(j);
-                            }
-                        }
-                    }
-                }
-            }
+    public static void Student_add(Scanner sc){
+        for (int i = 1; i < 9; i++) {
+            if (i == 1 || i <= 4) {
+                String neet1 = sc.next();
+                String neet = neet1.replaceAll(",$", "");
+                l.add(neet);
+            } else if (i == 5 || i == 6) {
+                String a = sc.next();
+                if(a.equalsIgnoreCase("true")){
+                    l.add(true);}else{l.add(false);}
+            } else if (i == 7) {
+                String b = sc.next();
+                String b1 = b.replaceAll(",$", "");
+                int b2 = Integer.parseInt(b1);
+                l.add(b2);
 
+            } else if (i == 8) {
+                String soup = sc.next();
+                String soup1 = soup.replaceAll(",$", "");
+                if (soup1.equalsIgnoreCase("paid"))
+                {l.add(Status.PAID);}
+                else{l.add(Status.Unpaid);}
 
-     }
+            }}
+        Management.Add_Student(new Students((String) l.get(0), (String) l.get(1), (String) l.get(2), (String) l.get(3), (Boolean) l.get(4), (Boolean) l.get(5),(int)l.get(6),(Status) l.get(7)));
+    }
+
+    public static void Faculty_a(Scanner sc){
+        for (int i = 1; i < 8; i++) {
+            if (i == 1 || i == 2 || i == 4 || i == 7) {
+                String meet1 = sc.next();
+                String meet = meet1.replaceAll(",$", "");
+                l.add(meet);
+            } else if (i == 3) {
+                String a = sc.next();
+                if(a.equalsIgnoreCase("true")){
+                    l.add(true);}else{l.add(false);}
+            } else if (i == 5) {
+                String b = sc.next();
+                String b1 = b.replaceAll(",$", "");
+                int b2 = Integer.parseInt(b1);
+                l.add(b2);
+
+            } else if (i == 6) {
+                String soup = sc.next();
+                String soup1 = soup.replaceAll(",$", "");
+                if (soup1.equalsIgnoreCase("paid"))
+                {l.add(Status.PAID);}
+                else{l.add(Status.Unpaid);}
+
+            }}
+        Management.Add_Faculty(new Faculty((String) l.get(0), (String) l.get(1), (boolean) l.get(2), (String) l.get(3), (int) l.get(4), (Status) l.get(5),(String)l.get(6)));
+    }
+
+    public static void Staff_a(Scanner sc){
+        for (int i = 1; i < 8; i++) {
+            if (i == 1 || i == 2 || i == 4 || i == 7) {
+                String meet1 = sc.next();
+                String meet = meet1.replaceAll(",$", "");
+                l.add(meet);
+            } else if (i == 3) {
+                String a = sc.next();
+                String seat = a.replaceAll(",$", "");
+                if(seat.equalsIgnoreCase("true")){
+                    l.add(true);}else{l.add(false);}
+            } else if (i == 5) {
+                String b = sc.next();
+                String b1 = b.replaceAll(",$", "");
+                int b2 = Integer.parseInt(b1);
+                l.add(b2);
+
+            } else if (i == 6) {
+                String soup = sc.next();
+                String soup1 = soup.replaceAll(",$", "");
+                if (soup1.equalsIgnoreCase("paid"))
+                {l.add(Status.PAID);}
+                else{l.add(Status.Unpaid);}
+
+            }}
+        Management.Add_Staff(new Staff((String) l.get(0), (String) l.get(1), (boolean) l.get(2), (String) l.get(3), (int) l.get(4), (Status) l.get(5),(String)l.get(6)));
+    }
 
 
 }

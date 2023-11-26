@@ -69,7 +69,7 @@ public class Students {
         this.hostelite = hostelite;
     }
 
-    public boolean isScholarship() {
+    public boolean getScholarship() {
         return scholarship;
     }
 
