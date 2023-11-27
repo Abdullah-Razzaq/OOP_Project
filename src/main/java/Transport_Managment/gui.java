@@ -151,9 +151,9 @@ public class gui extends Application {
         layout.setPadding(new Insets(10));
 
         addButton.setOnAction(e -> addMethod());
-        removeButton.setOnAction(e -> System.out.println("Remove button clicked"));
+        removeButton.setOnAction(e -> RemoveMethod(stage1));
         updateButton.setOnAction(e -> updateMethod());
-        searchButton.setOnAction(e -> System.out.println("Search button clicked"));
+        searchButton.setOnAction(e -> SearchMethod(stage1));
 
         Scene scene = new Scene(layout, 700, 500);
         stage1.setScene(scene);
@@ -237,6 +237,40 @@ public class gui extends Application {
         stage2.show();
     }
 
+
+    public void RemoveMethod(Stage stage){
+
+        GridPane gridPane = new GridPane();
+        Scene scene1 = new Scene(gridPane, 700,500);
+        HBox box0 = new HBox();
+        Text text = new Text("Enter Id or Reg no:");
+        TextField textField = new TextField();
+        Button remove = new Button("remove");
+        Button back = new Button("Back");
+        VBox box_v = new VBox();
+        VBox box_v2 = new VBox();
+        HBox b = new HBox();
+
+        box0.getChildren().addAll(text,textField,remove);
+        box0.setSpacing(20);
+
+        Text t = new Text("\n\n\n\n\n\n\n\n\n\n");
+        box_v.getChildren().add(t);
+        b.getChildren().add(back);
+        b.setPadding(new Insets(70,0,0,400));
+        box_v2.getChildren().addAll(box0,box_v,b);
+        box_v.setMaxWidth(20);
+        gridPane.add(box_v2,0,0);
+        gridPane.setPadding(new Insets(120,0,0,0));
+        gridPane.setAlignment(Pos.TOP_CENTER);
+        remove.setOnAction(e -> RemovePassengers(t));
+        back.setOnAction(e -> Passengers(stage));
+        stage.setScene(scene1);
+        stage.show();
+
+    }
+
+    
     private void updateMethod() {
         Stage updateStage = new Stage();
         updateStage.setTitle("Update Entry");
@@ -317,12 +351,54 @@ public class gui extends Application {
         updateStage.show();
     }
 
+    
+    public void SearchMethod(Stage stage){
+
+        GridPane gridPane = new GridPane();
+        Scene scene1 = new Scene(gridPane, 700,500);
+        HBox box0 = new HBox();
+        Text text = new Text("Enter Id or Reg no:");
+        TextField textField = new TextField();
+        Button remove = new Button("search");
+        Button back = new Button("Back");
+        VBox box_v = new VBox();
+        VBox box_v2 = new VBox();
+        HBox b = new HBox();
+
+        box0.getChildren().addAll(text,textField,remove);
+        box0.setSpacing(20);
+
+        Text t = new Text("\n\n\n\n\n\n\n\n\n\n");
+        box_v.getChildren().add(t);
+        b.getChildren().add(back);
+        b.setPadding(new Insets(70,0,0,400));
+        box_v2.getChildren().addAll(box0,box_v,b);
+        box_v.setMaxWidth(20);
+        gridPane.add(box_v2,0,0);
+        gridPane.setPadding(new Insets(120,0,0,0));
+        gridPane.setAlignment(Pos.TOP_CENTER);
+        remove.setOnAction(e -> SearchPassengers(t));
+        back.setOnAction(e -> Passengers(stage));
+        stage.setScene(scene1);
+        stage.show();
+
+    }
+
+
 
     private void addFields(GridPane layout, List<TextField> fields, String labelPrefix, String... labels) {
         for (int i = 0; i < labels.length; i++) {
             layout.addRow(2 + i, new Label(labelPrefix + labels[i]), fields.get(i));
         }
     }
+    
+public void RemovePassengers(Text text){
+        text.setText("\n\n\n\n\nReg not found\n\n\n\n\n");
+}
+
+public void SearchPassengers(Text text){
+        text.setText("\n\n\n\n\nReg not found\n\n\n\n\n");
+}
 
 
 
