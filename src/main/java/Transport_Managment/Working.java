@@ -134,19 +134,27 @@ public class Working{
                 case 5: {
                     System.out.println("""
                             1: Vehicles Required for route
-                            2: Number of Vehicles left""");
+                            2: Number of Vehicles left
+                            3: Add vehicles""");
                     choice1 = input.nextInt();
                     if (choice1 == 1) {
                         System.out.println("Enter route number:");
                         int route = input.nextInt();
                         System.out.println(b.Vehicle_Required_for_Route(route));
                     } else if (choice1 == 2) {
-                        b.No_of_Vehicles_Left();
+                        System.out.println(b.No_of_Vehicles_Left());
+                    }
+                    else if(choice1 ==3){
+                        int bus = input.nextInt();
+                        int Coaster = input.nextInt();
+                        b.setBus(bus);
+                        b.setCoaster(Coaster);
                     }
                     break;
                 }
                 case 6: {
                     System.out.println("Total payment received up till now: " + m.Total_Payment_Recieved());
+                    System.out.println(m.unpaid());
                     break;
                 }
                 case 7: {

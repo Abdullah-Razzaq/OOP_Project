@@ -8,11 +8,15 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-    static File file = new File("Raw Routes information");
+    static File file = new File("Raw Routes data");
+    static File file2 = new File("Raw data");
     static FileWriter fw;
     static BufferedWriter bw;
+    static FileWriter fw2;
+    static BufferedWriter bw2;
 
     static Routes re = new Routes();
+    static Bus b = new Bus();
     static ArrayList<Object> l = new ArrayList<>();
 
     public static void Write_File() throws IOException {
@@ -37,11 +41,42 @@ public class FileHandler {
         bw.close();
         fw.close();
 
+        fw2 = new FileWriter(file2);
+        bw2 = new BufferedWriter(fw2);
+
+        bw2.write(String.valueOf(b.getBus() + ","));
+        bw2.write("\t");
+        bw2.write(String.valueOf(b.getCoaster() + ","));
+        bw2.write("\t");
+        bw2.write(String.valueOf(re.getN() + ","));
+
+        bw2.close();
+        fw2.close();
+
     }
 
 
 
     public static void Read_file() throws IOException {
+
+        Scanner sc2 = new Scanner(file2);
+        while(sc2.hasNext()){
+            String s1 = sc2.next();
+            String s1_1 = s1.replaceAll(",$", "");
+            int t1 = Integer.parseInt(s1_1);
+            String s2 = sc2.next();
+            String s2_1 = s2.replaceAll(",$", "");
+            int t2 = Integer.parseInt(s2_1);
+            String s3 = sc2.next();
+            String s3_1 = s3.replaceAll(",$", "");
+            int t3 = Integer.parseInt(s3_1);
+            b.setBus(t1);
+            b.setCoaster(t2);
+            re.setN(t3);
+        }
+
+        if (b.getBus() == 0){b.setBus(10);}
+        if(b.getCoaster() == 0){b.setCoaster(10);}
 
         re.Array_Initialization();
         Scanner sc = new Scanner(file);
@@ -148,6 +183,5 @@ public class FileHandler {
             }}
         Management.Add_Staff(new Staff((String) l.get(0), (String) l.get(1), (boolean) l.get(2), (String) l.get(3), (int) l.get(4), (Status) l.get(5),(String)l.get(6)));
     }
-
 
 }
