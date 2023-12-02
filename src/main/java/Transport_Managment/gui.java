@@ -399,6 +399,51 @@ public class gui extends Application {
 
     }
 
+    public void Routes(Stage stage){
+        GridPane layout = new GridPane();
+
+        Button passengers = new Button("Route passengers quantity");
+        Button details = new Button("All Routes detail");
+        Button back = new Button("Back");
+
+        layout.add(passengers,0,0);
+        layout.add(details,0,1);
+        layout.add(back,0,2);
+
+        back.setPrefSize(200, 50);
+        passengers.setPrefSize(200, 50);
+        details.setPrefSize(200, 50);
+
+
+        layout.setAlignment(Pos.CENTER_RIGHT);
+
+        GridPane.setHalignment(passengers, HPos.RIGHT);
+        GridPane.setHalignment(details, HPos.RIGHT);
+        GridPane.setHalignment(back,HPos.RIGHT);
+
+        passengers.setOnAction(e ->{
+
+        });
+
+        details.setOnAction(e ->{
+
+        });
+
+        back.setOnAction(e -> {
+            try {
+                start(stage);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        Scene scene = new Scene(layout, 700, 500);
+        stage.setScene(scene);
+
+        stage.show();
+
+    }
+
     private void addFields(GridPane layout, List<TextField> fields, String labelPrefix, String... labels) {
         for (int i = 0; i < labels.length; i++) {
             layout.addRow(2 + i, new Label(labelPrefix + labels[i]), fields.get(i));
