@@ -2,6 +2,7 @@ package Transport_Managment;
 
 
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -63,6 +64,8 @@ public class gui extends Application {
         t2.setFont(Font.font("serif",20));
         t2.setFill(Color.rgb(103,188,241));
         Button button2 = new Button("Routes");
+        button2.setOnAction(e->{Routes(stage);});
+
         HBox box2_1 =new HBox();
         HBox box2_2 =new HBox();
         box2_1.getChildren().add(t2);
@@ -122,38 +125,45 @@ public class gui extends Application {
 
 
     public void Passengers(Stage stage1) {
+        GridPane layout = new GridPane();
 
         Button addButton = new Button("Add");
         Button removeButton = new Button("Remove");
         Button updateButton = new Button("Update");
         Button searchButton = new Button("Search");
+        Button back = new Button("Back");
 
-        addButton.setMaxWidth(Double.MAX_VALUE);
-        removeButton.setMaxWidth(Double.MAX_VALUE);
-        updateButton.setMaxWidth(Double.MAX_VALUE);
-        searchButton.setMaxWidth(Double.MAX_VALUE);
+        layout.add(addButton,0,0);
+        layout.add(removeButton,0,1);
+        layout.add(updateButton,0,2);
+        layout.add(searchButton,0,3);
+        layout.add(back,0,4);
 
-        ColumnConstraints columnConstraints = new ColumnConstraints();
-        columnConstraints.setHgrow(Priority.ALWAYS);
+        back.setPrefSize(100, 50);
+        removeButton.setPrefSize(100, 50);
+        searchButton.setPrefSize(100, 50);
+        updateButton.setPrefSize(100, 50);
+        addButton.setPrefSize(100, 50);
 
-        GridPane layout = new GridPane();
-        layout.getColumnConstraints().addAll(columnConstraints, columnConstraints, columnConstraints, columnConstraints);
+        layout.setAlignment(Pos.CENTER_RIGHT);
 
-        GridPane.setConstraints(addButton, 0, 0);
-        GridPane.setConstraints(removeButton, 1, 0);
-        GridPane.setConstraints(updateButton, 2, 0);
-        GridPane.setConstraints(searchButton, 3, 0);
-
-        layout.getChildren().addAll(addButton, removeButton, updateButton, searchButton);
-
-        layout.setHgap(10);
-        layout.setVgap(10);
-        layout.setPadding(new Insets(10));
+        GridPane.setHalignment(addButton, HPos.RIGHT);
+        GridPane.setHalignment(removeButton, HPos.RIGHT);
+        GridPane.setHalignment(updateButton, HPos.RIGHT);
+        GridPane.setHalignment(searchButton, HPos.RIGHT);
+        GridPane.setHalignment(back,HPos.RIGHT);
 
         addButton.setOnAction(e -> addMethod());
         removeButton.setOnAction(e -> RemoveMethod(stage1));
         updateButton.setOnAction(e -> updateMethod());
         searchButton.setOnAction(e -> SearchMethod(stage1));
+        back.setOnAction(e -> {
+            try {
+                start(stage1);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         Scene scene = new Scene(layout, 700, 500);
         stage1.setScene(scene);
@@ -168,7 +178,6 @@ public class gui extends Application {
 
         ChoiceBox<String> choice = new ChoiceBox<>();
         choice.getItems().addAll("Student", "Faculty", "Staff");
-        choice.setValue("Student");
 
         TextField name = new TextField();
         TextField id = new TextField();
@@ -189,6 +198,7 @@ public class gui extends Application {
         CheckBox scholarship = new CheckBox("Scholarship");
 
         Button submit = new Button("Submit");
+        Button back = new Button("Back");
 
         GridPane inputLayout = new GridPane();
         inputLayout.setHgap(10);
@@ -206,9 +216,9 @@ public class gui extends Application {
 
         choice.setOnAction(e -> {
             inputLayout.getChildren().removeAll(
-                    hostelite, scholarship, submit,
-                    facultyLabel, facultySpecialization, submit,
-                    staffLabel, staffDepartment, submit
+                    hostelite, scholarship, submit,back,
+                    facultyLabel, facultySpecialization,
+                    staffLabel, staffDepartment
             );
 
             switch (choice.getValue()) {
@@ -223,11 +233,19 @@ public class gui extends Application {
                     break;
             }
 
-            inputLayout.addRow(8, submit);
+            inputLayout.addRow(8, submit,back);
         });
 
         submit.setOnAction(e -> {
+            try {
+                FileHandler.Write_File();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             System.out.println("Submit button clicked");
+            stage2.close();
+        });
+        back.setOnAction(e->{
             stage2.close();
         });
 
@@ -236,7 +254,6 @@ public class gui extends Application {
 
         stage2.show();
     }
-
 
     public void RemoveMethod(Stage stage){
 
@@ -270,14 +287,12 @@ public class gui extends Application {
 
     }
 
-    
     private void updateMethod() {
         Stage updateStage = new Stage();
         updateStage.setTitle("Update Entry");
 
         ChoiceBox<String> entryTypeChoice = new ChoiceBox<>();
         entryTypeChoice.getItems().addAll("Student", "Faculty", "Staff");
-        entryTypeChoice.setValue("Student");
 
         TextField idUpdate = new TextField();
         Button searchButton = new Button("Search");
@@ -304,6 +319,9 @@ public class gui extends Application {
 
 
         Button updateButton = new Button("Update");
+        Button back = new Button("Back");
+
+        back.setOnAction(e -> updateStage.close());
         updateButton.setOnAction(e -> updateStage.close());
 
         GridPane updateLayout = new GridPane();
@@ -319,10 +337,7 @@ public class gui extends Application {
             updateLayout.getChildren().removeAll(oldFields);
             updateLayout.getChildren().removeAll(newFields);
             updateLayout.getChildren().removeIf(node -> node instanceof Label && !((Label) node).getText().equals("Select Entry Type:") && !((Label) node).getText().equals("Enter ID or Registration:"));
-            updateLayout.getChildren().remove(hostelite);
-            updateLayout.getChildren().remove(scholarship);
-            updateLayout.getChildren().remove(paymentStatus);
-            updateLayout.getChildren().remove(updateButton);
+            updateLayout.getChildren().removeAll(hostelite,scholarship,paymentStatus,updateButton,back);
 
             switch (entryTypeChoice.getValue()) {
                 case "Student":
@@ -343,7 +358,7 @@ public class gui extends Application {
                     break;
             }
 
-            updateLayout.addRow(20, updateButton);
+            updateLayout.addRow(20, updateButton,back);
         });
 
         Scene updateScene = new Scene(updateLayout, 600, 600);
@@ -351,7 +366,7 @@ public class gui extends Application {
         updateStage.show();
     }
 
-    
+
     public void SearchMethod(Stage stage){
 
         GridPane gridPane = new GridPane();
@@ -384,21 +399,19 @@ public class gui extends Application {
 
     }
 
-
-
     private void addFields(GridPane layout, List<TextField> fields, String labelPrefix, String... labels) {
         for (int i = 0; i < labels.length; i++) {
             layout.addRow(2 + i, new Label(labelPrefix + labels[i]), fields.get(i));
         }
     }
-    
-public void RemovePassengers(Text text){
-        text.setText("\n\n\n\n\nReg not found\n\n\n\n\n");
-}
 
-public void SearchPassengers(Text text){
+    public void RemovePassengers(Text text){
         text.setText("\n\n\n\n\nReg not found\n\n\n\n\n");
-}
+    }
+
+    public void SearchPassengers(Text text){
+        text.setText("\n\n\n\n\nReg not found\n\n\n\n\n");
+    }
 
 
 
