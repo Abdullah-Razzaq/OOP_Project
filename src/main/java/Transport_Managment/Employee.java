@@ -62,13 +62,14 @@ public class Employee {
         Payment_Status = payment_Status;
     }
 
-    public void displayInfo() {
-        System.out.println("Employee Type: " + (isFaculty ? "Faculty" : "Staff"));
-        System.out.println("Name: " + name);
-        System.out.println("ID: " + id);
-        System.out.println("Employee Route: " + route);
-        System.out.println("Employee payment: " + Payment);
-        System.out.println("Payment Status: " +Payment_Status);
+    public String displayInfo() {
+
+        return"Employee Type: " + (isFaculty ? "Faculty" : "Staff") + "\n" +
+                "Name: " + name + "\n" +
+                "ID: " + id + "\n"+
+                "Employee Route: " + route + "\n" +
+                "Employee payment: " + Payment + "\n" +
+                "Payment Status: " +Payment_Status + "\n";
     }
     @Override
     public String toString() {

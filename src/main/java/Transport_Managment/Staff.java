@@ -21,9 +21,9 @@ class Staff<T> extends Employee{
     }
 
     @Override
-    public void displayInfo() {
-        super.displayInfo();
-        System.out.println("Staff Department: " + staffDepartment);
+    public String displayInfo() {
+        return super.displayInfo() +
+                "Staff Department: " + staffDepartment;
     }
     @Override
     public String toString() {

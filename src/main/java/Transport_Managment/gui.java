@@ -213,7 +213,6 @@ public class gui extends Application {
         inputLayout.addRow(5, new Label("Payment:"), payment);
         inputLayout.addRow(6, new Label("PaymentStatus:"), paymentStatus);
 
-
         choice.setOnAction(e -> {
             inputLayout.getChildren().removeAll(
                     hostelite, scholarship, submit,back,
@@ -402,14 +401,17 @@ public class gui extends Application {
     public void Routes(Stage stage){
         GridPane layout = new GridPane();
 
+        Button addRoute = new Button("Add new Route");
         Button passengers = new Button("Route passengers quantity");
         Button details = new Button("All Routes detail");
         Button back = new Button("Back");
 
-        layout.add(passengers,0,0);
-        layout.add(details,0,1);
-        layout.add(back,0,2);
+        layout.add(addRoute,0,0);
+        layout.add(passengers,0,1);
+        layout.add(details,0,2);
+        layout.add(back,0,3);
 
+        addRoute.setPrefSize(200,50);
         back.setPrefSize(200, 50);
         passengers.setPrefSize(200, 50);
         details.setPrefSize(200, 50);
@@ -417,9 +419,14 @@ public class gui extends Application {
 
         layout.setAlignment(Pos.CENTER_RIGHT);
 
+        GridPane.setHalignment(addRoute,HPos.RIGHT);
         GridPane.setHalignment(passengers, HPos.RIGHT);
         GridPane.setHalignment(details, HPos.RIGHT);
         GridPane.setHalignment(back,HPos.RIGHT);
+
+        addRoute.setOnAction(e->{
+
+        });
 
         passengers.setOnAction(e ->{
 

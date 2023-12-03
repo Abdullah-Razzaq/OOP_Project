@@ -21,9 +21,9 @@ class Faculty<T> extends Employee {
     }
 
     @Override
-    public void displayInfo() {
-        super.displayInfo();
-        System.out.println("Faculty Specialization: " + facultySpecialization);
+    public String displayInfo() {
+        return super.displayInfo() +
+                "Faculty Specialization: " + facultySpecialization;
     }
     @Override
     public String toString() {
