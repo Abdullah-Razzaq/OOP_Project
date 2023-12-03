@@ -1,4 +1,4 @@
-package Transport_Managment;
+package com.example.group;
 
 class Faculty<T> extends Employee {
     private T facultySpecialization;
