@@ -1,5 +1,6 @@
 package com.example.group;
 
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +77,7 @@ public class FileHandler {
         }
 
         if (b.getBus() == 0){b.setBus(10);}
-        if(b.getCoaster() == 0){b.setCoaster(10);}
+        if(b.getCoaster() == 0){b.setBus(10);}
 
         re.Array_Initialization();
         Scanner sc = new Scanner(file);

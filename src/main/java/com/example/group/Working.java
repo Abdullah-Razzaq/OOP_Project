@@ -1,5 +1,6 @@
 package com.example.group;
 
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -154,7 +155,7 @@ public class Working{
                 }
                 case 6: {
                     System.out.println("Total payment received up till now: " + m.Total_Payment_Recieved());
-                    System.out.println(m.unpaid());
+                    System.out.println(m.Unpaid_passengers());
                     break;
                 }
                 case 7: {
@@ -230,3 +231,5 @@ public class Working{
         staffDepartment = input1.nextLine();
     }
 }
+
+

@@ -1,5 +1,6 @@
 package com.example.group;
 
+
 public class Students {
 
     private String name;
@@ -97,14 +98,31 @@ public class Students {
     @Override
     public String toString() {
         return "Students_info: " +
-                "name= \"" + name + '\"' +
-                ", Reg_no= \"" + Reg_no + '\"' +
-                ", Program= \"" + Program + '\"' +
-                ", hostelite= " + hostelite +
-                ", scholarship= " + scholarship +
-                ", route= \"" + route + '\"' +
-                ", Payment= Rs" + Payment +
-                ", Payment_Status= " + Payment_Status;
+                " | name: " + name  +
+                " | Reg_no: " + Reg_no +
+                " | Program: " + Program  +
+                " | hostelite: " + hostelite +
+                " | scholarship: " + scholarship +
+                " | route: " + route +
+                " | Payment: Rs" + Payment +
+                " | Payment_Status: " + Payment_Status;
+    }
+
+    public String displayinfo(){
+        String s;
+        String s1;
+        if (scholarship == true){ s="Yes";} else{s="No";}
+        if (hostelite == true){ s1="Yes";} else{s1="No";}
+
+        return  "Students_info:  " + "\n"+
+                "Name:   " + name + "\n" +
+                "Reg_no:   " + Reg_no + "\n" +
+                "Program:  " + Program + "\n"  +
+                "Hostelite:   " + s + "\n" +
+                "scholarship:   " + s1 + "\n" +
+                "Route:   " + route + "\n"  +
+                "Payment:   Rs" + Payment + "\n" +
+                "Payment_Status:   " + Payment_Status;
     }
 
     @Override

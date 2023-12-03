@@ -102,12 +102,26 @@ public class Management {
                 Routes.routes.get(i).add(staff);
             }}
     }
-    public void Remove(String Id_or_Registration){
+    public String Remove(String Id_or_Registration){
 
         for (int i = 0; i < r.routes.size(); i++) {
             for (int j = 0; j < r.routes.get(i).size(); j++) {
                 if(r.routes.get(i).get(j).equals(Id_or_Registration)){
-                    r.routes.get(i).remove(j);
+                    if(r.routes.get(i).get(j) instanceof Students){
+                        Students s = (Students) r.routes.get(i).get(j);
+                        r.routes.get(i).remove(j);
+                        return s.displayinfo();
+                    }
+                    else if(r.routes.get(i).get(j) instanceof Faculty){
+                        Faculty f = (Faculty) r.routes.get(i).get(j);
+                        r.routes.get(i).remove(j);
+                        return f.displayInfo();
+                    }
+                    else if(r.routes.get(i).get(j) instanceof Staff){
+                        Staff st = (Staff) r.routes.get(i).get(j);
+                        r.routes.get(i).remove(j);
+                        return st.displayInfo();
+                    }
                 }
             }
         }
@@ -120,7 +134,7 @@ public class Management {
             }
         }
 
-        System.out.println("Successfully removed");
+        return "Reg or Id not found";
     }
 
     public void Update_Student(String Id_or_Registration, Students student){
@@ -224,15 +238,27 @@ public class Management {
     }
 
 
-    public void Search_Using_Id(String Id_or_Registration){
+    public String Search_Using_Id(String Id_or_Registration){
 
         for (int i = 0; i < r.routes.size(); i++) {
             for (int j = 0; j < r.routes.get(i).size(); j++) {
                 if(r.routes.get(i).get(j).equals(Id_or_Registration)){
-                    r.routes.get(i).get(j);
+                    if(r.routes.get(i).get(j) instanceof Students){
+                        Students s = (Students) r.routes.get(i).get(j);
+                        return s.displayinfo();
+                    }
+                    else if(r.routes.get(i).get(j) instanceof Faculty){
+                        Faculty f = (Faculty) r.routes.get(i).get(j);
+                        return f.displayInfo();
+                    }
+                    else if(r.routes.get(i).get(j) instanceof Staff){
+                        Staff st = (Staff) r.routes.get(i).get(j);
+                        return st.displayInfo();
+                    }
                 }
             }
         }
+        return "\n\n\nReg or Id not found\n\n\n";
     }
 
 
@@ -242,16 +268,17 @@ public class Management {
 
     }
 
-    public  String Unpaid_passengers(){
+    public  String unpaid(){
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < pay.size(); i++) {
+            sb.append(String.format("%d.",i+1));
             sb.append(pay.get(i));
-            sb.append("\n");
+            sb.append("\n\n");
         }
         pay.clear();
         return sb.toString();
     }
-    public String unpaid(){
+    public String Unpaid_passengers(){
         Students s;
         Faculty f;
         Staff sf;
@@ -286,7 +313,7 @@ public class Management {
             return "There is no Unpaid passenger";
         }
 
-        return Unpaid_passengers();
+        return unpaid() ;
 
     }
 }
