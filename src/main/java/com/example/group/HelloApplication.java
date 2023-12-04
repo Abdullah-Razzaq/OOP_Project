@@ -415,8 +415,8 @@ public class HelloApplication extends Application {
         box3.setAlignment(Pos.CENTER);
         box4.setAlignment(Pos.CENTER);
 
-        addRoute.setOnAction(e -> {});
-        passengers.setOnAction(e -> {});
+        addRoute.setOnAction(e -> {subclass.addRoute(back_g);});
+        passengers.setOnAction(e -> {subclass.routeQuantity(back_g);});
         details.setOnAction(e -> {});
         back.setOnAction(e -> {
             try {

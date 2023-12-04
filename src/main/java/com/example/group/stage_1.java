@@ -406,6 +406,107 @@ public class stage_1 {
         stage3_1.setY(100);
         stage3_1.show();
     }
+    public void addRoute(String back_g){
+        Stage stage = new Stage();
+        GridPane grid = new GridPane();
+        Scene scene = new Scene(grid, 550,500);
+        grid.setStyle(back_g);
+        scene.getStylesheets().add(css);
+
+        Text text1 = new Text("Enter new Route: ");
+        TextField route=new TextField();
+        Button enter = new Button("Enter");
+        Button back = new Button("Back");
+
+        text1.setFill(Color.WHITE);
+        text1.getStyleClass().add("text-001");
+
+        HBox box1 = new HBox();
+        HBox box2 = new HBox();
+        HBox box3 = new HBox();
+
+        box1.getChildren().addAll(text1,route,enter);
+        box3.getChildren().addAll(back);
+
+        back.setPadding(new Insets(10,20,10,20));
+        enter.setPadding(new Insets(5,10,5,10));
+        box1.setSpacing(30);
+        box2.setSpacing(10);
+        box1.setPadding(new Insets(10,11,12,9));
+        box2.setPadding(new Insets(30,0,0,0));
+        box3.setPadding(new Insets(30,0,0,0));
+
+        enter.setOnAction(e -> {});
+
+        try {
+            FileHandler.write();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        back.setOnAction(e -> {stage.close();});
+
+        grid.setAlignment(Pos.CENTER_LEFT);
+        grid.setPadding(new Insets(0,0,0,130));
+        grid.add(box1,0,0);
+        grid.add(box2,0,1);
+        grid.add(box3,0,2);
+        stage.setScene(scene);
+        stage.setX(400);
+        stage.setY(100);
+        stage.show();
+
+    }
+    public void routeQuantity(String back_g){
+        Stage stage2 = new Stage();
+        GridPane grid = new GridPane();
+        grid.setStyle(back_g);
+        Scene scene = new Scene(grid , 550, 500);
+        scene.getStylesheets().add(css);
+
+        Text text = new Text("Enter Route no: ");
+        Text print = new Text();
+        TextField textField = new TextField();
+        Button required = new Button("required");
+        Button back = new Button("Back");
+
+        print.setUserData("string");
+
+        HBox box = new HBox();
+        HBox box1 = new HBox();
+        VBox box2  = new VBox();
+        box.setSpacing(20);
+        box.getChildren().addAll(text,textField,required);
+        box.getChildren().add(print);
+
+        text.setFill(Color.WHITE);
+        text.getStyleClass().add("text-001");
+
+        box1.getChildren().add(print);
+        box1.setPadding(new Insets(40,0,0,30));
+        required.setPadding(new Insets(5,10,5,10));
+        required.setOnAction(e -> {
+            print.setText(exceptions.vehicle_required_ex(textField.getText()));
+            print.getStyleClass().add("text-001");
+            print.setFill(Color.WHITE);
+        });
+
+        back.setPadding(new Insets(10,20,10,20));
+        box2.getChildren().add(back);
+        box2.setPadding(new Insets(100,0,0,0));
+        back.setOnAction(e-> stage2.close());
+        grid.setPadding(new Insets(160,40,40,100));
+        grid.add(box, 0,0);
+        grid.add(box1, 0,1);
+        grid.add(box2, 0,2);
+        stage2.setScene(scene);
+        stage2.setX(400);
+        stage2.setY(100);
+        stage2.show();
+
+
+
+    }
     public void AddVehicles(Stage stage3, String backG) {
         Stage stage = new Stage();
         GridPane grid = new GridPane();
