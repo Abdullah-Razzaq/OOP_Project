@@ -40,10 +40,11 @@ public class HelloApplication extends Application {
 
 
         String background = "-fx-background-color: linear-gradient(to top, rgb(32,33,37)  , rgb(40,41,45) , rgb(63,67,86));";
+        String background1 = "-fx-background-color: linear-gradient(to top, rgb(32,33,37)  , rgba(40,41,45) , rgba(63,67,86,0.71));";
 
         GridPane grid = new GridPane();
         Scene scene = new Scene(grid,850,600);
-        grid.setStyle(background);
+        grid.setStyle(background1);
         Text welcome = new Text("WELCOME TO\n\tCUI ROUTE MANAGEMENT");
         Button button = new Button("Click here to continue");
 
@@ -417,7 +418,7 @@ public class HelloApplication extends Application {
 
         addRoute.setOnAction(e -> {subclass.addRoute(back_g);});
         passengers.setOnAction(e -> {subclass.routeQuantity(back_g);});
-        details.setOnAction(e -> {});
+        details.setOnAction(e -> {subclass.All_Route(back_g);});
         back.setOnAction(e -> {
             try {
                 main_page(stage, back_g);

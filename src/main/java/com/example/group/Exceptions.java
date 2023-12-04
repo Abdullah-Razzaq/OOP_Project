@@ -60,4 +60,23 @@ public class Exceptions {
         }
         return "0";
     }
+
+
+    public String Pass_quantity_ex(String r) {
+        int r1 = 0, flag = 0;
+        try {
+            r1 = Integer.parseInt(r);
+        } catch (NumberFormatException e1) {
+            flag = 1;
+            return "* Invalid input, Enter only numbers";
+        }
+        if (flag == 0) {
+            if (r1 >= route_class.getN()) {
+                return "* Route doesn't exist!";
+            } else {
+                return String.format("Number of passengers: %02d",  Routes.Number_of_Passengers(r1));
+            }
+        }
+        return "0";
+    }
 }
