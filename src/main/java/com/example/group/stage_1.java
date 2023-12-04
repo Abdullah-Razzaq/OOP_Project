@@ -8,6 +8,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -20,6 +22,7 @@ public class stage_1 {
     Exceptions exceptions = new Exceptions();
     String css = getClass().getResource("/Style.css").toExternalForm();
     Bus bus_class_1 = new Bus();
+    Routes route_class = new Routes();
     public void addMethod(String back_g) {
 
         Stage stage2 = new Stage();
@@ -271,7 +274,6 @@ public class stage_1 {
 
         back.setOnAction(e ->/* Passengers(stage)*/ {
             stage.close();
-            System.out.println("pressed");
         });
 
         gridPane.add(box_v2,0,0);
@@ -487,4 +489,58 @@ public class stage_1 {
         }
     }
 
+    public void All_routes(String back_g){
+    Stage stage4 = new Stage();
+    GridPane gridPane = new GridPane();
+    Scene scene1 = new Scene(gridPane,  850,600);
+        gridPane.setStyle(back_g);
+    HBox box = new HBox();
+    Text text = new Text("*All Route Details*");
+
+
+        text.setStyle("-fx-fill: rgb(255,255,255); -fx-font-size: 30px; ");
+        text.setFont(Font.font("Monospaced", FontWeight.BOLD,39));
+        text.setUnderline(true);
+    HBox box2 = new HBox();
+    Text passe = new Text("Routes passengers:");
+        box2.getChildren().add(passe);
+        passe.setFont(Font.font("Monospaced", FontWeight.NORMAL,19));
+        passe.setFill(Color.WHITE);
+        box2.setPadding(new Insets(80,0,1,0));
+        box.getChildren().addAll(text);
+        box.setSpacing(30);
+        box.setPadding(new Insets(40,0,0,70));
+    ScrollPane s = new ScrollPane();
+
+    HBox box0 = new HBox();
+    Button back = new Button("Back");
+        back.setPadding(new Insets(10,20,10,20));
+        box0.getChildren().add(back);
+        box0.setPadding(new Insets(60,0,0,0));
+
+    Text t = new Text();
+        t.setText(route_class.toString());
+        t.setFill(Color.WHITE);
+        t.setStyle("-fx-font-size: 17px;");
+
+        s.setPrefViewportWidth(590);
+        s.setPrefViewportHeight(220);
+        s.setContent(t);
+        s.setStyle("-fx-background:  rgb(43,43,43) ");
+
+        gridPane.add(box,0,0);
+        gridPane.add(box2,0,1);
+        gridPane.add(s,0,2);
+        gridPane.add(box0,1,3);
+        gridPane.setPadding(new Insets(0,0,0,60));
+        gridPane.setAlignment(Pos.CENTER);
+
+        back.setOnAction(e -> {
+        stage4.close();
+    });
+
+        stage4.setScene(scene1);
+        stage4.show();
+
+}
 }

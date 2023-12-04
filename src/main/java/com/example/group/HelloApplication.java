@@ -418,7 +418,7 @@ public class HelloApplication extends Application {
 
         addRoute.setOnAction(e -> {});
         passengers.setOnAction(e -> {});
-        details.setOnAction(e -> {});
+        details.setOnAction(e -> {subclass.All_routes(back_g);});
         back.setOnAction(e -> {
             try {
                 main_page(stage, back_g);
