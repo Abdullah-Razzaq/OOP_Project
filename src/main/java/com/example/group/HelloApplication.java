@@ -26,17 +26,60 @@ public class HelloApplication extends Application {
     stage_1 subclass = new stage_1();
 
     Management management = new Management();
+    PauseTransition delay = new PauseTransition(Duration.millis(20));
+
 
     public void start(Stage stage) throws IOException {
 
         FileHandler.Read_file();
 
-        String background = "-fx-background-color: linear-gradient(to top, rgb(32,33,37)  , rgb(40,41,45) , rgb(63,67,86));";
         String button_presses ="-fx-background-color: rgba(92,108,121); -fx-font-size: 18px; -fx-text-fill: rgb(104,202,255);";
         String normal_button = "-fx-background-color: rgba(59,74,170,0); -fx-font-size: 18px; -fx-text-fill: rgb(255,255,255);";
 
-        PauseTransition delay = new PauseTransition(Duration.millis(20));
 
+        String background = "-fx-background-color: linear-gradient(to top, rgb(32,33,37)  , rgb(40,41,45) , rgb(63,67,86));";
+
+        GridPane grid = new GridPane();
+        Scene scene = new Scene(grid,850,600);
+        grid.setStyle(background);
+        Text welcome = new Text("WELCOME TO\n\tCUI ROUTE MANAGEMENT");
+        Button button = new Button("Click here to continue");
+
+        VBox box = new VBox();
+        HBox box1 = new HBox();
+        box1.getChildren().addAll(button);
+        box.getChildren().addAll(welcome,box1);
+
+        box1.setPadding(new Insets(80,0,0,190));
+        button.setUnderline(true);
+
+        button.setStyle(normal_button);
+        welcome.setFont(Font.font("Monospaced", FontWeight.BOLD,37));
+        welcome.setFill(Color.WHITE);
+
+
+        grid.add(box,0,0);
+        grid.setAlignment(Pos.CENTER);
+
+        button.setOnAction(e -> {
+            button.setStyle(button_presses);
+            delay.setOnFinished(event -> {
+                try {
+                    main_page(stage, background);
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+            delay.play();
+        });
+        stage.setScene(scene);
+        stage.show();
+
+    }
+    public void main_page(Stage stage, String background) throws FileNotFoundException {
+
+        String button_presses ="-fx-background-color: rgba(92,108,121); -fx-font-size: 18px; -fx-text-fill: rgb(104,202,255);";
+        String normal_button = "-fx-background-color: rgba(59,74,170,0); -fx-font-size: 18px; -fx-text-fill: rgb(255,255,255);";
 
         GridPane grid = new GridPane();
         Scene scene = new Scene(grid, 850,600 );
@@ -135,14 +178,15 @@ public class HelloApplication extends Application {
 
         button1.setOnAction(e -> {
             button1.setStyle(button_presses);
+            delay.setOnFinished(event -> {subclass.RemovePassengers( background);});
             delay.play();
         });
 
         button2.setOnAction(e -> {
-            button2.setStyle(button_presses);
+            button1.setStyle(button_presses);
+            delay.setOnFinished(event -> {subclass.SearchPassengers( background);});
             delay.play();
         });
-
 
         button3.setOnAction(e -> {
             button3.setStyle(button_presses);
@@ -157,11 +201,11 @@ public class HelloApplication extends Application {
         });
 
         exit.setOnAction(e -> {stage.close();
-//            try {
-//                FileHandler.Write_File();
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
+            try {
+                FileHandler.Write_File();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         grid.add(sub_head1,0,0);
@@ -259,7 +303,7 @@ public class HelloApplication extends Application {
         button3.setOnAction(e -> {subclass.AddVehicles(stage3, back_g);});
         back.setOnAction(e -> {
             try {
-                start(stage3);
+                main_page(stage3, back_g);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }

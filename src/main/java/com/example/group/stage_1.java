@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class stage_1 {
 
     Exceptions exceptions = new Exceptions();
@@ -254,6 +256,11 @@ public class stage_1 {
 
         enter.setOnAction(e -> {text3.setText(exceptions.vehicle_Add_ex(bus.getText(), coaster.getText()));
             text3.setFill(Color.WHITE);
+            try {
+                FileHandler.write();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             text3.getStyleClass().add("text-001");});
 
         back.setOnAction(e -> {stage.close();});

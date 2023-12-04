@@ -42,6 +42,11 @@ public class FileHandler {
         bw.close();
         fw.close();
 
+
+
+    }
+
+    public static void write() throws IOException {
         fw2 = new FileWriter(file2);
         bw2 = new BufferedWriter(fw2);
 
@@ -53,9 +58,7 @@ public class FileHandler {
 
         bw2.close();
         fw2.close();
-
     }
-
 
 
     public static void Read_file() throws IOException {
