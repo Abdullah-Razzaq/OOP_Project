@@ -229,7 +229,7 @@ public class HelloApplication extends Application {
         GridPane layout = new GridPane();
         layout.setStyle(background);
 
-        Scene scene = new Scene(layout, 850, 600);
+        Scene scene = new Scene(layout, 800, 550);
         scene.getStylesheets().add(css);
 
         Image add = null;
