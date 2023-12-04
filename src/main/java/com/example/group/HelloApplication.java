@@ -200,6 +200,7 @@ public class HelloApplication extends Application {
             delay.play();
         });
 
+
         exit.setOnAction(e -> {stage.close();
             try {
                 FileHandler.Write_File();
