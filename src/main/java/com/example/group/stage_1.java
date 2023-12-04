@@ -28,7 +28,7 @@ public class stage_1 {
         GridPane inputLayout = new GridPane();
         inputLayout.setStyle(back_g);
 
-        Scene inputScene = new Scene(inputLayout, 400, 400);
+        Scene inputScene = new Scene(inputLayout, 550, 500);
         inputScene.getStylesheets().add(css);
 
         ChoiceBox<String> choice = new ChoiceBox<>();
@@ -118,6 +118,8 @@ public class stage_1 {
         });
 
 
+        stage2.setX(400);
+        stage2.setY(100);
 
         stage2.setScene(inputScene);
 
@@ -130,7 +132,7 @@ public class stage_1 {
         GridPane updateLayout = new GridPane();
         updateLayout.setStyle(back_g);
 
-        Scene updateScene = new Scene(updateLayout, 600, 600);
+        Scene updateScene = new Scene(updateLayout, 550, 500);
         updateScene.getStylesheets().add(css);
 
         ChoiceBox<String> entryTypeChoice = new ChoiceBox<>();
@@ -210,6 +212,8 @@ public class stage_1 {
             updateLayout.addRow(20, updateButton,back);
         });
 
+        updateStage.setX(400);
+        updateStage.setY(100);
         updateStage.setScene(updateScene);
         updateStage.show();
     }
@@ -217,7 +221,7 @@ public class stage_1 {
         Stage stage = new Stage();
         GridPane gridPane = new GridPane();
         gridPane.setStyle(back_g);
-        Scene scene1 = new Scene(gridPane, 550,500);
+        Scene scene1 = new Scene(gridPane, 550, 500);
         scene1.getStylesheets().add(css);
 
         HBox box0 = new HBox();
@@ -285,7 +289,7 @@ public class stage_1 {
 
         Stage stage = new Stage();
         GridPane gridPane = new GridPane();
-        Scene scene1 = new Scene(gridPane, 550,500);
+        Scene scene1 = new Scene(gridPane, 550, 500);
         gridPane.setStyle(back_g);
         scene1.getStylesheets().add(css);
 
