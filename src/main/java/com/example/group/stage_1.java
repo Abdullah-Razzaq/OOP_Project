@@ -3,8 +3,7 @@ package com.example.group;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,12 +12,207 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class stage_1 {
 
     Exceptions exceptions = new Exceptions();
     String css = getClass().getResource("/Style.css").toExternalForm();
     Bus bus_class_1 = new Bus();
+    public void addMethod(String back_g) {
+
+        Stage stage2 = new Stage();
+        stage2.setTitle("Add Entry");
+
+        GridPane inputLayout = new GridPane();
+        inputLayout.setStyle(back_g);
+
+        Scene inputScene = new Scene(inputLayout, 400, 400);
+        inputScene.getStylesheets().add(css);
+
+        ChoiceBox<String> choice = new ChoiceBox<>();
+        choice.getItems().addAll("Student", "Faculty", "Staff");
+
+        TextField name = new TextField();
+        TextField id = new TextField();
+        TextField program = new TextField();
+        TextField route = new TextField();
+        TextField payment = new TextField();
+        ChoiceBox<String> paymentStatus = new ChoiceBox<>();
+        paymentStatus.getItems().addAll("Paid", "Unpaid");
+        paymentStatus.setValue("Unpaid");
+
+        TextField facultySpecialization = new TextField();
+        Label facultyLabel = new Label("Faculty Specialization:");
+
+        TextField staffDepartment = new TextField();
+        Label staffLabel = new Label("Staff Department:");
+
+        CheckBox hostelite = new CheckBox("Hostelite");
+        CheckBox scholarship = new CheckBox("Scholarship");
+        hostelite.setStyle("-fx-text-fill: white;");
+        scholarship.setStyle("-fx-text-fill: white;");
+
+        Button submit = new Button("Submit");
+        Button back = new Button("Back");
+
+        inputLayout.setHgap(10);
+        inputLayout.setVgap(10);
+        inputLayout.setPadding(new Insets(10));
+
+        Label ch=new Label("Select Entry Type");
+        Label na=new Label("Name:");
+        Label ir=new Label("ID or Registration:");
+        Label pr=new Label("Program:");
+        Label r=new Label("Route:");
+        Label pa=new Label("Payment:");
+        Label ps=new Label("PaymentStatus:");
+
+        inputLayout.addRow(0, ch, choice);
+        inputLayout.addRow(1, na, name);
+        inputLayout.addRow(2, ir, id);
+        inputLayout.addRow(3, pr, program);
+        inputLayout.addRow(4, r, route);
+        inputLayout.addRow(5, pa, payment);
+        inputLayout.addRow(6, ps, paymentStatus);
+
+        ch.setTextFill(Color.WHITE);
+        na.setTextFill(Color.WHITE);
+        ir.setTextFill(Color.WHITE);
+        pa.setTextFill(Color.WHITE);
+        ps.setTextFill(Color.WHITE);
+        pr.setTextFill(Color.WHITE);
+        r.setTextFill(Color.WHITE);
+        facultyLabel.setTextFill(Color.WHITE);
+        staffLabel.setTextFill(Color.WHITE);
+
+        choice.setOnAction(e -> {
+            inputLayout.getChildren().removeAll(
+                    hostelite, scholarship, submit,back,
+                    facultyLabel, facultySpecialization,
+                    staffLabel, staffDepartment
+            );
+
+            switch (choice.getValue()) {
+                case "Student":
+                    inputLayout.addRow(7, hostelite, scholarship);
+                    break;
+                case "Faculty":
+                    inputLayout.addRow(7, facultyLabel, facultySpecialization);
+                    break;
+                case "Staff":
+                    inputLayout.addRow(7, staffLabel, staffDepartment);
+                    break;
+            }
+
+            inputLayout.addRow(8, submit,back);
+        });
+
+        submit.setOnAction(e -> {
+            System.out.println("Submit button clicked");
+            stage2.close();
+        });
+        back.setOnAction(e->{
+            stage2.close();
+        });
+
+
+
+        stage2.setScene(inputScene);
+
+        stage2.show();
+    }
+    public void updateMethod(String back_g) {
+        Stage updateStage = new Stage();
+        updateStage.setTitle("Update Entry");
+
+        GridPane updateLayout = new GridPane();
+        updateLayout.setStyle(back_g);
+
+        Scene updateScene = new Scene(updateLayout, 600, 600);
+        updateScene.getStylesheets().add(css);
+
+        ChoiceBox<String> entryTypeChoice = new ChoiceBox<>();
+        entryTypeChoice.getItems().addAll("Student", "Faculty", "Staff");
+
+        TextField idUpdate = new TextField();
+        Button searchButton = new Button("Search");
+
+        searchButton.setOnAction(e -> {
+
+            String id = idUpdate.getText();
+
+        });
+
+        List<TextField> oldFields = new ArrayList<>();
+        List<TextField> newFields = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            oldFields.add(new TextField());
+            newFields.add(new TextField());
+        }
+
+        ChoiceBox<String> paymentStatus = new ChoiceBox<>();
+        paymentStatus.getItems().addAll("Paid", "Unpaid");
+        paymentStatus.setValue("Unpaid");
+        CheckBox hostelite = new CheckBox("Hostelite");
+        CheckBox scholarship = new CheckBox("Scholarship");
+        hostelite.setStyle("-fx-text-fill: white;");
+        scholarship.setStyle("-fx-text-fill: white;");
+
+        Button updateButton = new Button("Update");
+        Button back = new Button("Back");
+
+        back.setOnAction(e -> updateStage.close());
+        updateButton.setOnAction(e -> updateStage.close());
+
+        updateLayout.setHgap(10);
+        updateLayout.setVgap(10);
+        updateLayout.setPadding(new Insets(10));
+
+        Label ch = new Label("Select Entry Type:");
+        Label ir = new Label("Enter ID or Registration:");
+        Label ps = new Label("Payment Status:");
+        ch.setTextFill(Color.WHITE);
+        ir.setTextFill(Color.WHITE);
+        ps.setTextFill(Color.WHITE);
+
+        updateLayout.addRow(0,ch, entryTypeChoice);
+        updateLayout.addRow(1, ir, idUpdate, searchButton);
+
+        entryTypeChoice.setOnAction(e -> {
+
+            updateLayout.getChildren().removeAll(oldFields);
+            updateLayout.getChildren().removeAll(newFields);
+            updateLayout.getChildren().removeIf(node -> node instanceof Label && !((Label) node).getText().equals("Select Entry Type:") && !((Label) node).getText().equals("Enter ID or Registration:"));
+            updateLayout.getChildren().removeAll(hostelite,scholarship,paymentStatus,updateButton,back);
+
+            switch (entryTypeChoice.getValue()) {
+                case "Student":
+                    addFields(updateLayout,updateScene, oldFields, "Old ", "Name", "ID", "Program", "Route", "Payment");
+                    addFields(updateLayout,updateScene, newFields, "New ", "Name", "ID", "Program", "Route", "Payment");
+                    updateLayout.addRow(7, ps, paymentStatus);
+                    updateLayout.addRow(8, hostelite, scholarship);
+                    break;
+                case "Faculty":
+                    addFields(updateLayout,updateScene, oldFields, "Old ", "Name", "ID", "Route", "Payment", "Faculty Specialization");
+                    addFields(updateLayout, updateScene,newFields, "New ", "Name", "ID", "Route", "Payment", "Faculty Specialization");
+                    updateLayout.addRow(7, ps, paymentStatus);
+                    break;
+                case "Staff":
+                    addFields(updateLayout, updateScene,oldFields, "Old ", "Name", "ID", "Route", "Payment", "Staff Department");
+                    addFields(updateLayout, updateScene,newFields, "New ", "Name", "ID", "Route", "Payment", "Department");
+                    updateLayout.addRow(7,ps, paymentStatus);
+                    break;
+            }
+
+            updateLayout.addRow(20, updateButton,back);
+        });
+
+        updateStage.setScene(updateScene);
+        updateStage.show();
+    }
     public void RemovePassengers(String back_g){
         Stage stage = new Stage();
         GridPane gridPane = new GridPane();
@@ -72,6 +266,7 @@ public class stage_1 {
                 text2.setText("* Successfully Removed !");}});
 
         back.setOnAction(e ->/* Passengers(stage)*/ {
+            stage.close();
             System.out.println("pressed");
         });
 
@@ -125,7 +320,7 @@ public class stage_1 {
         gridPane.add(box_v2,0,0);
         gridPane.setAlignment(Pos.TOP_CENTER);
         search.setOnAction(e -> output.setText(exceptions.Searchmethod(textField.getText())));
-//        back.setOnAction(e -> Passengers(stage));
+        back.setOnAction(e ->stage.close());
         stage.setX(400);
         stage.setY(100);
         stage.setScene(scene1);
@@ -277,6 +472,15 @@ public class stage_1 {
         stage.setY(100);
         stage.show();
 
+    }
+    private void addFields(GridPane layout, Scene scene, List<TextField> fields, String labelPrefix, String... labels) {
+        scene.getStylesheets().add(css);
+
+        for (int i = 0; i < labels.length; i++) {
+            Label label = new Label(labelPrefix + labels[i]);
+            label.setTextFill(Color.WHITE);
+            layout.addRow(2 + i, label, fields.get(i));
+        }
     }
 
 }

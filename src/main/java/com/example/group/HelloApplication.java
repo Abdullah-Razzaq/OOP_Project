@@ -2,11 +2,11 @@ package com.example.group;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -19,6 +19,8 @@ import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class HelloApplication extends Application {
@@ -178,13 +180,14 @@ public class HelloApplication extends Application {
 
         button1.setOnAction(e -> {
             button1.setStyle(button_presses);
-            delay.setOnFinished(event -> {subclass.RemovePassengers( background);});
+            delay.setOnFinished(event ->{Passengers(stage,background);});
+//            delay.setOnFinished(event -> {subclass.RemovePassengers( background);});
             delay.play();
         });
 
         button2.setOnAction(e -> {
-            button1.setStyle(button_presses);
-            delay.setOnFinished(event -> {subclass.SearchPassengers( background);});
+            button2.setStyle(button_presses);
+            delay.setOnFinished(event -> { Routes(stage, background); });
             delay.play();
         });
 
@@ -221,7 +224,217 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+    public void Passengers(Stage stage1,String background) {
+        GridPane layout = new GridPane();
+        layout.setStyle(background);
 
+        Scene scene = new Scene(layout, 850, 600);
+        scene.getStylesheets().add(css);
+
+        Image add = null;
+        Image rem = null;
+        Image upda = null;
+        Image sear = null;
+        Image exi  = null;
+        try {
+            add = new Image(new FileInputStream("src/main/java/com/example/group/adper.png"));
+            rem = new Image(new FileInputStream("src/main/java/com/example/group/rem.png"));
+            upda = new Image(new FileInputStream("src/main/java/com/example/group/multi-user-3-256.png"));
+            sear = new Image(new FileInputStream("src/main/java/com/example/group/search.png"));
+            exi= new Image(new FileInputStream("src/main/java/com/example/group/exit.png"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ImageView img1 = new ImageView(add);
+        ImageView img2 = new ImageView(rem);
+        ImageView img3 = new ImageView(upda);
+        ImageView img4 = new ImageView(sear);
+        ImageView img5 = new ImageView(exi);
+
+        img1.setFitHeight(20);
+        img1.setFitWidth(20);
+
+        img2.setFitHeight(20);
+        img2.setFitWidth(20);
+
+        img3.setFitHeight(20);
+        img3.setFitWidth(20);
+
+        img4.setFitHeight(20);
+        img4.setFitWidth(20);
+
+        img5.setFitHeight(20);
+        img5.setFitWidth(20);
+
+        VBox box1 = new VBox();
+        VBox box2 = new VBox();
+        VBox box3 = new VBox();
+        VBox box4 = new VBox();
+        VBox box5 = new VBox();
+
+        Button addButton = new Button("Add");
+        Button removeButton = new Button("Remove");
+        Button updateButton = new Button("Update");
+        Button searchButton = new Button("Search");
+        Button back = new Button("Back");
+
+        addButton.getStyleClass().add("button_un");
+        removeButton.getStyleClass().add("button_un");
+        updateButton.getStyleClass().add("button_un");
+        searchButton.getStyleClass().add("button_un");
+        back.getStyleClass().add("button_un");
+
+        box1.getChildren().addAll(img1,addButton);
+        box2.getChildren().addAll(img2,removeButton);
+        box3.getChildren().addAll(img3,updateButton);
+        box4.getChildren().addAll(img4,searchButton);
+        box5.getChildren().addAll(img5,back);
+
+        box1.setSpacing(7);
+        box2.setSpacing(7);
+        box3.setSpacing(7);
+
+        box1.setPadding(new Insets(19,20,10,30));
+        box2.setPadding(new Insets(19,20,10,30));
+        box3.setPadding(new Insets(19,20,10,30));
+        box4.setPadding(new Insets(20,20,22,30));
+        box5.setPadding(new Insets(20,20,22,30));
+
+
+        box1.setStyle("-fx-border-color: rgb(104,202,255); -fx-border-width: 1px 0px 1px 1px;");
+        box2.setStyle("-fx-border-color: rgb(104,202,255); -fx-border-width: 1px 0px 1px 1px;");
+        box3.setStyle("-fx-border-color: rgb(104,202,255); -fx-border-width: 1px 0px 1px 1px;");
+        box4.setStyle("-fx-border-color: rgb(104,202,255); -fx-border-width: 1px 0px 1px 1px;");
+        box5.setStyle("-fx-border-color: rgb(104,202,255); -fx-border-width: 1px 0px 1px 1px;");
+
+        box1.setAlignment(Pos.CENTER);
+        box2.setAlignment(Pos.CENTER);
+        box3.setAlignment(Pos.CENTER);
+        box4.setAlignment(Pos.CENTER);
+        box5.setAlignment(Pos.CENTER);
+
+        layout.add(box1, 0 , 0);
+        layout.add(box2, 0 , 1);
+        layout.add(box3, 0 , 2);
+        layout.add(box4, 0,3);
+        layout.add(box5, 0,4);
+
+        layout.setPadding(new Insets(70,0,0,0));
+        layout.setAlignment(Pos.BASELINE_RIGHT);
+        stage1.setScene(scene);
+        stage1.show();
+
+        addButton.setOnAction(e -> {subclass.addMethod(background);});
+        removeButton.setOnAction(e -> {subclass.RemovePassengers(background);});
+        updateButton.setOnAction(e -> {subclass.updateMethod(background);});
+        searchButton.setOnAction(e -> {subclass.SearchPassengers(background);});
+        back.setOnAction(e -> {
+            try {
+                main_page(stage1,background);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+    }
+    public void Routes(Stage stage,String back_g) {
+
+        GridPane layout = new GridPane();
+        layout.setStyle(back_g);
+
+        Scene scene = new Scene(layout, 850, 600);
+        scene.getStylesheets().add(css);
+
+        Image newr = null;
+        Image pass = null;
+        Image det = null;
+        Image exi  = null;
+        try {
+            newr = new Image(new FileInputStream("src/main/java/com/example/group/routes2.png"));
+            pass = new Image(new FileInputStream("src/main/java/com/example/group/multi-user-3-256.png"));
+            det = new Image(new FileInputStream("src/main/java/com/example/group/bus.png"));
+            exi= new Image(new FileInputStream("src/main/java/com/example/group/exit.png"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ImageView img1 = new ImageView(newr);
+        ImageView img2 = new ImageView(pass);
+        ImageView img3 = new ImageView(det);
+        ImageView img4 = new ImageView(exi);
+
+        img1.setFitHeight(40);
+        img1.setFitWidth(40);
+
+        img2.setFitHeight(40);
+        img2.setFitWidth(40);
+
+        img3.setFitHeight(40);
+        img3.setFitWidth(40);
+
+        img4.setFitHeight(40);
+        img4.setFitWidth(40);
+
+        VBox box1 = new VBox();
+        VBox box2 = new VBox();
+        VBox box3 = new VBox();
+        VBox box4 = new VBox();
+
+
+        Button addRoute = new Button("Add new Route");
+        Button passengers = new Button("Route passengers quantity");
+        Button details = new Button("All Routes detail");
+        Button back = new Button("Back");
+
+        addRoute.getStyleClass().add("button_un");
+        passengers.getStyleClass().add("button_un");
+        details.getStyleClass().add("button_un");
+        back.getStyleClass().add("button_un");
+
+
+        box1.getChildren().addAll(img1,addRoute);
+        box2.getChildren().addAll(img2,passengers);
+        box3.getChildren().addAll(img3,details);
+        box4.getChildren().addAll(img4,back);
+
+        box1.setSpacing(7);
+        box2.setSpacing(7);
+        box3.setSpacing(7);
+
+        box1.setPadding(new Insets(19,20,10,30));
+        box2.setPadding(new Insets(19,20,10,30));
+        box3.setPadding(new Insets(19,20,10,30));
+        box4.setPadding(new Insets(20,20,22,30));
+
+        box1.setStyle("-fx-border-color: rgb(104,202,255); -fx-border-width: 1px 0px 1px 1px;");
+        box2.setStyle("-fx-border-color: rgb(104,202,255); -fx-border-width: 1px 0px 1px 1px;");
+        box3.setStyle("-fx-border-color: rgb(104,202,255); -fx-border-width: 1px 0px 1px 1px;");
+        box4.setStyle("-fx-border-color: rgb(104,202,255); -fx-border-width: 1px 0px 1px 1px;");
+
+        box1.setAlignment(Pos.CENTER);
+        box2.setAlignment(Pos.CENTER);
+        box3.setAlignment(Pos.CENTER);
+        box4.setAlignment(Pos.CENTER);
+
+        addRoute.setOnAction(e -> {});
+        passengers.setOnAction(e -> {});
+        details.setOnAction(e -> {});
+        back.setOnAction(e -> {
+            try {
+                main_page(stage, back_g);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        layout.add(box1, 0 , 0);
+        layout.add(box2, 0 , 1);
+        layout.add(box3, 0 , 2);
+        layout.add(box4, 0,3);
+        layout.setPadding(new Insets(70,0,0,0));
+        layout.setAlignment(Pos.BASELINE_RIGHT);
+
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public void Busses(Stage stage3, String back_g){
 
@@ -377,4 +590,5 @@ public class HelloApplication extends Application {
         stage4.show();
 
     }
+
 }
