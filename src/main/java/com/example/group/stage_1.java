@@ -416,10 +416,17 @@ public class stage_1 {
         grid.setStyle(back_g);
         scene.getStylesheets().add(css);
 
-        Text text1 = new Text("Enter new Route: ");
-        TextField route=new TextField();
-        Button enter = new Button("Enter");
+        Text text1 = new Text("Already present Route:  ");
+        Text route=new Text();
+        Text out = new Text();
+        Button enter = new Button("Add route");
         Button back = new Button("Back");
+
+        route.setText(String.format("%02d", (Routes.n - 1)));
+        route.setFill(Color.WHITE);
+        route.getStyleClass().add("text-001");
+        out.setFill(Color.WHITE);
+        out.getStyleClass().add("text-001");
 
         text1.setFill(Color.WHITE);
         text1.getStyleClass().add("text-001");
@@ -427,8 +434,10 @@ public class stage_1 {
         HBox box1 = new HBox();
         HBox box2 = new HBox();
         HBox box3 = new HBox();
+        VBox box4  = new VBox();
 
         box1.getChildren().addAll(text1,route,enter);
+        box4.getChildren().addAll(box1,out);
         box3.getChildren().addAll(back);
 
         back.setPadding(new Insets(10,20,10,20));
@@ -439,19 +448,26 @@ public class stage_1 {
         box2.setPadding(new Insets(30,0,0,0));
         box3.setPadding(new Insets(30,0,0,0));
 
-        enter.setOnAction(e -> {});
-
         try {
             FileHandler.write();
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
 
+
+        enter.setOnAction(e -> {r.Add_New_Route();
+            try {
+                FileHandler.write();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            out.setText("Route added successfully!");});
+
         back.setOnAction(e -> {stage.close();});
 
         grid.setAlignment(Pos.CENTER_LEFT);
         grid.setPadding(new Insets(0,0,0,130));
-        grid.add(box1,0,0);
+        grid.add(box4,0,0);
         grid.add(box2,0,1);
         grid.add(box3,0,2);
         stage.setScene(scene);
