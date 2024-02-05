@@ -200,7 +200,7 @@ public class HelloApplication extends Application {
 
         button4.setOnAction(e -> {
             button4.setStyle(button_presses);
-            delay.setOnFinished(event -> {Payment(normal_button,background, button4);});
+            delay.setOnFinished(event -> {Payment(normal_button,background, button4,stage);});
             delay.play();
         });
 
@@ -534,9 +534,8 @@ public class HelloApplication extends Application {
     }
 
 
-    public void Payment(String sta, String back_g, Button b1){
+    public void Payment(String sta, String back_g, Button b1, Stage stage4){
 
-        Stage stage4 = new Stage();
         GridPane gridPane = new GridPane();
         Scene scene1 = new Scene(gridPane, 850,600);
         gridPane.setStyle(back_g);
@@ -584,8 +583,11 @@ public class HelloApplication extends Application {
         gridPane.setAlignment(Pos.CENTER);
 
         back.setOnAction(e -> {
-            stage4.close();
-            b1.setStyle(sta);
+            try {
+                main_page(stage4, back_g);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         stage4.setScene(scene1);
         stage4.show();

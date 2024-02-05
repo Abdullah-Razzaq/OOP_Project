@@ -16,7 +16,7 @@ public class Management {
         for (int i = 0; i < Routes.routes.size(); i++) {
 
             if(student.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                Total_Payment = Total_Payment + student.getPayment();
+                if(student.getPayment_Status().getValue() == 1){Total_Payment = Total_Payment + student.getPayment();}
                 Routes.routes.get(i).add(student);
             }}
         Routes.info.add(new ArrayList<Object>());
@@ -36,7 +36,7 @@ public class Management {
         for (int i = 0; i < Routes.routes.size(); i++) {
 
             if(s.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                Total_Payment = Total_Payment + s.getPayment();
+                if(s.getPayment_Status().getValue() == 1){Total_Payment = Total_Payment + s.getPayment();}
                 Routes.routes.get(i).add(s);
             }}
     }
@@ -47,7 +47,7 @@ public class Management {
         for (int i = 0; i < Routes.routes.size(); i++) {
 
             if(faculty.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                Total_Payment = Total_Payment + faculty.getPayment();
+                if(faculty.getPayment_Status().getValue() == 1) {Total_Payment = Total_Payment + faculty.getPayment();}
                 Routes.routes.get(i).add(faculty);
             }}
 
@@ -67,7 +67,7 @@ public class Management {
         for (int i = 0; i < Routes.routes.size(); i++) {
 
             if(faculty.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                Total_Payment = Total_Payment + faculty.getPayment();
+                if(faculty.getPayment_Status().getValue() == 1){Total_Payment = Total_Payment + faculty.getPayment();}
                 Routes.routes.get(i).add(faculty);
             }}
     }
@@ -77,7 +77,7 @@ public class Management {
         for (int i = 0; i < Routes.routes.size(); i++) {
 
             if(staff.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                Total_Payment = Total_Payment + staff.getPayment();
+                if(staff.getPayment_Status().getValue() == 1){Total_Payment = Total_Payment + staff.getPayment();}
                 Routes.routes.get(i).add(staff);
             }}
 
@@ -98,7 +98,7 @@ public class Management {
         for (int i = 0; i < Routes.routes.size(); i++) {
 
             if(staff.getRoute().equalsIgnoreCase(String.format("Route%d", i+1))){
-                Total_Payment = Total_Payment + staff.getPayment();
+                if(staff.getPayment_Status().getValue() == 1){Total_Payment = Total_Payment + staff.getPayment();}
                 Routes.routes.get(i).add(staff);
             }}
     }
